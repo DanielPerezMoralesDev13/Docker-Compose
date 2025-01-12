@@ -100,8 +100,8 @@ services:
 *Eliminar el atributo `version` es seguro y recomendado en proyectos con Docker Compose actualizado, eliminando advertencias y adaptando tu configuración a los estándares actuales.*
 
 ```bash
-docker network rm --force version1mongoservices_default
-docker rm --force version1mongoservices-mongo-demo-1 version1mongoservices-mongo-express-1 
+docker network rm --force version1mongoservices_default;
+docker rm --force version1mongoservices-mongo-demo-1 version1mongoservices-mongo-express-1;
 ```
 
 ```bash

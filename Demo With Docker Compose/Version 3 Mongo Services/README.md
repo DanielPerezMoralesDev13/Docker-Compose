@@ -5,6 +5,11 @@
 # **Logs Mongo Service Version 3 Docker Compose**
 
 ```bash
+docker network rm --force version2mongoservices_default;
+docker rm --force version2mongoservices-mongo-demo-1 version2mongoservices-mongo-express-1;
+```
+
+```bash
 docker compose --file mongo-services.yaml up;
 ```
 
@@ -19,9 +24,9 @@ docker compose -fmongo-services.yaml up;
 ```bash
 docker compose -fmongo-services.yaml up;
 [+] Running 3/2
- ✔ Network version3mongoservices_default            Created                                                                      0.1s
- ✔ Container version3mongoservices-mongo-demo-1     Created                                                                      0.1s
- ✔ Container version3mongoservices-mongo-express-1  Created                                                                      0.0s
+ ✔ Network version2mongoservices_default            Created                                                                      0.1s
+ ✔ Container version2mongoservices-mongo-demo-1     Created                                                                      0.1s
+ ✔ Container version2mongoservices-mongo-express-1  Created                                                                      0.0s
 Attaching to mongo-demo-1, mongo-express-1
 mongo-demo-1     | about to fork child process, waiting until server is ready for connections.
 mongo-demo-1     | forked process: 28

@@ -65,9 +65,72 @@ docker run -d \
     mongo-express:latest;
 ```
 
-creamos un archivo personalizado de docker compose normalmente se le suele llamar docker-compose pero nostros le llamaresmo mongo-services.yaml
+### **Usando un archivo personalizado de Docker Compose**
 
+- *Cuando creamos un archivo personalizado de Docker Compose, a menudo se le llama **`docker-compose.yml`**. Sin embargo, si decidimos darle un nombre diferente (en este caso, **`mongo-services.yaml`**), debemos asegurarnos de indicarlo correctamente al ejecutar los comandos de Docker Compose.*
+
+- *Por ejemplo, si hemos creado el archivo personalizado **`mongo-services.yaml`**, lo primero que debemos hacer es asegurarnos de estar en el directorio donde se encuentra el archivo. Si no estamos en la misma ubicación, debemos utilizar el parámetro **`-f`** o **`--file`** para especificar la ruta al archivo de configuración.*
+
+### **Creación del archivo personalizado**
+
+- *Para crear un archivo con el nombre **`mongo-services.yaml`**, simplemente ejecutamos:*
+
+```bash
 touch mongo-services.yaml
+```
+
+- *Esto creará un archivo vacío que podemos editar con nuestra configuración personalizada de Docker Compose.*
+
+### **Ejecutando Docker Compose con un archivo personalizado**
+
+- *Si usamos un archivo con un nombre diferente o si no estamos ubicados en el directorio donde se encuentra el archivo **`docker-compose.yml`** (o en este caso **`mongo-services.yaml`**), debemos especificar la ubicación del archivo utilizando el parámetro **`-f`** o **`--file`**. Podemos proporcionar una **ruta relativa** o **absoluta** al archivo.*
+
+**Ejemplo:** *Si el archivo **`mongo-services.yaml`** se encuentra en una subcarpeta llamada **`Version 1 Mongo Services`**, debemos usar:*
+
+```bash
+docker compose -f ./Directory/mongo-services.yaml up
+```
+
+### **Detalles importantes**
+
+- **Ruta relativa:** *En este caso, la ruta es relativa, comenzando desde el directorio actual. Debemos tener en cuenta las **espacios en los nombres de las carpetas** y usarlos correctamente con las barras invertidas (`\`) para escaparlos, como en **`Directory`**.*
+- **Ruta absoluta:** *Si proporcionamos una ruta absoluta, podemos especificar la ruta completa al archivo, por ejemplo:*
+
+  ```bash
+  docker compose -f /home/user/Proyect/Directory/mongo-services.yaml up
+  ```
+
+  ```bash
+  docker compose -f $HOME/Proyect/Directory/mongo-services.yaml up
+  ```
+
+### **¿Qué pasa cuando ejecutamos `docker compose up` o `docker compose down`?**
+
+- **`docker compose up`:** *Este comando **levanta los servicios definidos** en el archivo **`mongo-services.yaml`**. Docker Compose leerá la configuración del archivo y arrancará los contenedores definidos.*
+- **`docker compose down`:** *Este comando **detiene y elimina los contenedores, redes y volúmenes** asociados con el archivo de configuración, lo que limpia todo el entorno creado por Docker Compose.*
+
+**Recuerda:** *Siempre que no estés en el mismo directorio donde se encuentra tu archivo **`docker-compose.yml`** o **`mongo-services.yaml`**, debes especificar la ubicación del archivo con **`-f`** o **`--file`**, seguido de la ruta correspondiente.*
+
+- **Resumen**
+
+- **Cuando usamos `docker compose up` o `docker compose down`,** *debemos estar en el directorio correcto donde se encuentra el archivo **`docker-compose.yml`** o utilizar el parámetro **`-f`** o **`--file`** para indicar la ruta al archivo si se encuentra en una ubicación diferente.*
+- *Si le damos un nombre diferente al archivo (como **`mongo-services.yaml`**), asegurarnos de especificar correctamente la ruta al archivo con el parámetro **`-f`** o **`--file`**.*
+  
+- *Por ejemplo, si el archivo **`mongo-services.yaml`** se encuentra en una subcarpeta, usaríamos:*
+
+- **Iniciar Servicios**
+
+```bash
+docker compose -f ./Directory/mongo-services.yaml up
+```
+
+- **Detenerlos Y Removerlos**
+
+```bash
+docker compose -f ./Directory/mongo-services.yaml down
+```
+
+- **`Content mongo-services.yaml`**
 
 ```yaml
 # Autor: Daniel Benjamin Perez Morales

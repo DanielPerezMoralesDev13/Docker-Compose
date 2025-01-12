@@ -476,3 +476,4 @@ entrypoint:
 - *Se usa para declarar bloques de texto donde se necesita preservar la estructura de las líneas (por ejemplo, en comandos complejos o scripts).*
 
 - *Si usaras `>` en lugar de `|`, las líneas se concatenarían y el resultado final sería una sola línea.*
+
