@@ -1,4 +1,8 @@
-# Foros
+<!-- Autor: Daniel Benjamin Perez Morales -->
+<!-- GitHub: https://github.com/DanielPerezMoralesDev13 -->
+<!-- Correo electrónico: danielperezdev@proton.me -->
+
+# **Foros**
 
 - *[.docker/config.json vs .dockercfg](https://stackoverflow.com/questions/35519072/docker-config-json-vs-dockercfg "https://stackoverflow.com/questions/35519072/docker-config-json-vs-dockercfg")*
 - *['docker ps' output formatting: list only names of running containers](https://stackoverflow.com/questions/50667371/docker-ps-output-formatting-list-only-names-of-running-containers  "https://stackoverflow.com/questions/50667371/docker-ps-output-formatting-list-only-names-of-running-containers")*
@@ -49,14 +53,14 @@
       "credsStore": "osxkeychain",
       "ServerURL": "https://index.docker.io/v1",
       "Username": "DanielPerez",
-      "Secret": "passw0rd123"
+      "Secret": "passw0rd123",
       "credHelpers": {
         "myregistry.example.com": "secretservice",
         "docker.internal.example": "pass",
       }
 
       "HttpHeaders": {
-        "User-Agent": "Docker-Client/20.10.5 (darwin)"
+        "User-Agent": "Docker-Client/27.4.0 (linux)"
       },
       "psFormat": "table {{.ID}} \t {{.Image}} \t {{.Status}} \t {{.Names}}"
     }

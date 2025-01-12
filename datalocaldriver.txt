@@ -1,3 +1,5 @@
+https://youtu.be/SXwC9fSwct8?t=1414
+
 https://ubuntu.com/tutorials/install-and-configure-apache
 https://ioflood.com/blog/install-systemctl-command-linux/
 https://www.digitalocean.com/community/tutorials/how-to-configure-the-apache-web-server-on-an-ubuntu-or-debian-vps
@@ -17,3 +19,10 @@ host
 sudo nano /etc/hosts
 172.17.0.2 gci.example.com
 http://gci.example.com
+
+
+---
+
+para base de datos 
+
+https://stackoverflow.com/questions/21795340/linux-install-redis-cli-only
