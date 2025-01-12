@@ -178,7 +178,7 @@ services:
       - ME_CONFIG_MONGODB_PORT=27017
 ```
 
-- *[Logs Mongo Services Version 2 Docker Compose](/Demo%20With%20Docker%20Compose/Version%202%20Mongo%20Services/Logs%20Mongo%20Services%20Version%202%20Docker%20Compose.md "/Demo%20With%20Docker%20Compose/Version%202%20Mongo%20Services/Logs%20Mongo%20Services%20Version%202%20Docker%20Compose.md")*
+- *[Logs Mongo Services Version 2 Docker Compose](/Demo%20With%20Docker%20Compose/Version%202%20Mongo%20Services/README.md "/Demo%20With%20Docker%20Compose/Version%202%20Mongo%20Services/README.md")*
 
 ### **Error de conexión entre contenedores**
 
@@ -232,7 +232,7 @@ services:
       - ME_CONFIG_MONGODB_PORT=27017
 ```
 
-*[Logs Mongo Services Version 3 Docker Compose](/Demo%20With%20Docker%20Compose/Version%203%20Mongo%20Services/Logs%20Mongo%20Services%20Version%203%20Docker%20Compose.md "/Demo%20With%20Docker%20Compose/Version%203%20Mongo%20Services/Logs%20Mongo%20Services%20Version%203%20Docker%20Compose.md")*
+*[Logs Mongo Services Version 3 Docker Compose](/Demo%20With%20Docker%20Compose/Version%203%20Mongo%20Services/README.md "/Demo%20With%20Docker%20Compose/Version%203%20Mongo%20Services/README.md")*
 
 ## **Comando para listar redes Docker personalizadas**
 
@@ -330,11 +330,54 @@ a0ea5cd9c7c1   mongo-express   "/sbin/tini -- /dock…"   22 minutes ago   Up 16
 > [!IMPORTANT]
 > *Cuando usamos **Docker Compose** para ejecutar servicios, al presionar `Ctrl + C` en la terminal, estamos enviando una señal **SIGINT** (interrupción) al proceso principal del contenedor. Esto detiene los servicios de manera ordenada.*
 
+- **Gracefully stopping... (press Ctrl+C again to force)**
+
+**uando usas Ctrl+C en la terminal mientras Docker Compose está en ejecución, lo que realmente sucede es que se envía una señal SIGINT (interrupción de teclado) a los contenedores. Esto detiene los contenedores, pero no los elimina. El entorno Docker sigue existiendo, y los contenedores permanecen en el sistema, aunque ya no estén en ejecución.**
+
+- **Detiene los contenedores:** *La ejecución de los contenedores se detiene, pero siguen existiendo en el sistema.*
+- **No elimina redes, contenedores ni volúmenes:** *Después de usar Ctrl+C, los contenedores estarán detenidos, pero las redes y volúmenes persistirán en tu entorno Docker.*
+
 ```bash
+Gracefully stopping... (press Ctrl+C again to force)
 [+] Stopping 2/2
  ✔ Container version1mongoservices-mongo-express-1  Stopped                                                                      0.2s
  ✔ Container version1mongoservices-mongo-demo-1     Stopped                                                                      0.3s
 ```
+
+- **Docker Compose Down**
+
+- **El comando docker compose down no solo detiene los contenedores, sino que también elimina los contenedores, redes, volúmenes y demás recursos asociados a los servicios definidos en tu archivo docker-compose.yml.**
+
+- **Detiene y elimina los contenedores:** *Los contenedores en ejecución son detenidos y eliminados.*
+- **Elimina las redes creadas por Docker Compose:** *También elimina las redes que Docker Compose crea para interconectar los servicios entre sí.*
+- **Elimina los volúmenes, si se especifica:** *Si usas la opción --volumes o -v, también elimina los volúmenes asociados con los servicios.*
+
+*Esto garantiza que tu entorno de Docker se limpie por completo, y no quedarán contenedores ni redes de la configuración anterior.*
+
+```bash
+docker compose --file mongo-services.yaml down
+```
+
+```bash
+docker compose -f mongo-services.yaml down
+```
+
+```bash
+docker compose -fmongo-services.yaml down
+```
+
+```bash
+docker compose -fmongo-services.yaml down
+[+] Running 3/3
+ ✔ Container version1mongoservices-mongo-express-1  Removed                                                                     10.4s
+ ✔ Container version1mongoservices-mongo-demo-1     Removed                                                                      0.3s
+ ✔ Network version1mongoservices_default            Removed                                                                      0.2s
+```
+
+**Resumen:**
+
+- **docker compose down:** *Detiene y elimina contenedores, redes y volúmenes asociados con los servicios.*
+- **Ctrl+C (SIGINT):** *Detiene los contenedores pero no los elimina, manteniendo la configuración y los recursos (contenedores, redes, volúmenes) en tu sistema.*
 
 ### *¿Qué es **SIGINT**?*
 
