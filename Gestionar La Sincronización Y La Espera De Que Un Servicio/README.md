@@ -95,6 +95,8 @@ services:
 *[Github Dockerize](https://github.com/jwilder/dockerize "https://github.com/jwilder/dockerize")*
 *[Github Wait For It](https://github.com/vishnubob/wait-for-it "https://github.com/vishnubob/wait-for-it")*
 
+*[Wait For It](https://stackoverflow.com/questions/63198731/how-to-use-wait-for-it-in-docker-compose-file "https://stackoverflow.com/questions/63198731/how-to-use-wait-for-it-in-docker-compose-file")*
+
 - **`dockerize`** *tiene más opciones y funcionalidades, como esperar por servicios TCP, archivos o HTTP, lo que lo hace más flexible en algunos escenarios.*
 - **`wait-for-it.sh`** *es una solución más simple y ligera, ideal si solo necesitas esperar un puerto específico.*
 
