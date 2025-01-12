@@ -70,6 +70,10 @@ creamos un archivo personalizado de docker compose normalmente se le suele llama
 touch mongo-services.yaml
 
 ```yaml
+# Autor: Daniel Benjamin Perez Morales
+# GitHub: https://github.com/DanielPerezMoralesDev13
+# Correo electrónico: danielperezdev@proton.me
+
 version: '3.8'
 services:
   mongo-demo:

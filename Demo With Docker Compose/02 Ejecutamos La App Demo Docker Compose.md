@@ -145,6 +145,10 @@ WARN[0000] /home/d4nitrix13/Escritorio/Repository/Docker Compose/Demo With Docke
 - *Para resolverla, se debe eliminar el atributo `version` del archivo `mongo-services.yaml`, ya que está **deprecated**.*
 
 ```yaml
+# Autor: Daniel Benjamin Perez Morales
+# GitHub: https://github.com/DanielPerezMoralesDev13
+# Correo electrónico: danielperezdev@proton.me
+
 services:
   mongo-demo:
     image: mongo:latest
@@ -193,6 +197,10 @@ mongo-express-1  | /docker-entrypoint.sh: line 15: /dev/tcp/mongo-demo/27017: Co
 **Es posible que el contenedor `mongo-demo` aún esté iniciando cuando `mongo-express` intenta conectarse. Una forma de resolverlo es asegurarse de que `mongo-express` espere hasta que `mongo-demo` esté completamente listo. Esto puede lograrse mediante la configuración de dependencias en el archivo `docker-compose.yml` usando `depends_on` o configurando un retraso en el inicio de `mongo-express`.**
 
 ```yaml
+# Autor: Daniel Benjamin Perez Morales
+# GitHub: https://github.com/DanielPerezMoralesDev13
+# Correo electrónico: danielperezdev@proton.me
+
 services:
   mongo-demo:
     image: mongo:latest
@@ -203,7 +211,7 @@ services:
       - MONGO_INITDB_ROOT_PASSWORD=supersecret
   mongo-express:
     depends_on:
-      - "mongo-demo"
+      - mongo-demo
     image: mongo-express
     ports:
       - 8081:8081
@@ -353,3 +361,75 @@ a0ea5cd9c7c1   mongo-express   "/sbin/tini -- /dock…"   22 minutes ago   Up 16
 - *Es el método recomendado cuando estás trabajando en desarrollo o necesitas detener servicios temporalmente.*
 
 - *Si necesitas apagar todo el stack de manera más completa (incluyendo eliminación de redes y volúmenes), usa el comando `docker-compose down`.*
+
+### **Problema: MongoDB no está listo cuando mongo-express intenta conectarse `depends_on`**
+
+*[Foro Depends On](https://stackoverflow.com/questions/71060072/docker-compose-depends-on-with-condition-invalid-type-should-be-an-array "https://stackoverflow.com/questions/71060072/docker-compose-depends-on-with-condition-invalid-type-should-be-an-array")*
+
+- *Mongo-express podría estar intentando conectarse a MongoDB antes de que el servicio `mongo-demo` esté completamente disponible. Aunque hayas configurado la dependencia en el archivo YAML con `depends_on`, esto solo garantiza que Docker intente iniciar el contenedor `mongo-demo` antes de `mongo-express`, pero **no espera a que MongoDB esté realmente listo para aceptar conexiones**.*
+
+- **Docker Compose asegura que el contenedor de `mongo-demo` inicie primero, pero no verifica si MongoDB está en funcionamiento o si está completamente listo para aceptar conexiones. Esto puede llevar a que `mongo-express` falle al intentar conectarse, ya que MongoDB aún no está escuchando en el puerto.**
+
+### ***Solución: Mecanismo de espera en `mongo-express`***
+
+*[Logs Mongo Services Version 3](/Demo%20With%20Docker%20Compose/Version%203%20Mongo%20Services/Logs%20Mongo%20Services%20Version%203%20Docker%20Compose.md "/Demo%20With%20Docker%20Compose/Version%203%20Mongo%20Services/Logs%20Mongo%20Services%20Version%203%20Docker%20Compose.md")*
+
+- *Para asegurarte de que MongoDB esté completamente disponible antes de que `mongo-express` intente conectarse, puedes agregar un **mecanismo de espera**. Esto se puede lograr de varias maneras:*
+
+1. **Usar `nc` para esperar a que MongoDB esté listo**:
+
+   - **Puedes añadir un bucle `until` en el `entrypoint` de `mongo-express` para verificar continuamente si el puerto de MongoDB (`27017`) está abierto y accesible.**
+
+   **Ejemplo de configuración en exec form:**
+
+   ```yaml
+   entrypoint:
+     - /bin/sh
+     - -c
+     - |
+       until nc -zv mongo-demo 27017; do
+         echo "Waiting For Mongo";
+         sleep 1;
+       done;
+       exec /sbin/tini -- /docker-entrypoint.sh
+   ```
+
+   - *En este caso, el contenedor `mongo-express` esperará hasta que el puerto `27017` en el servicio `mongo-demo` esté accesible, lo que indica que MongoDB está listo. Una vez que se establezca la conexión, se ejecutará el comando principal del contenedor (`/docker-entrypoint.sh`).*
+
+2. **Alternativas:** *También puedes usar herramientas como **wait-for-it** o **dockerize**, que están diseñadas específicamente para este tipo de casos. Estas herramientas permiten que un contenedor espere a que otro servicio esté disponible antes de continuar con su ejecución.*
+
+> [!TIP]
+> *El símbolo **`|`** en un archivo YAML (y en general en muchos lenguajes y configuraciones) se utiliza para indicar que el valor de una clave será un **bloque de texto multilínea**. Cuando se usa en YAML, permite escribir texto que se extiende a varias líneas y se conserva la indentación en el resultado final.*
+
+### **¿Cómo funciona?**
+
+- **Cuando se usa `|` en YAML, el contenido que sigue en las líneas posteriores se considera parte de un bloque de texto y las nuevas líneas se preservan tal como están, incluyendo saltos de línea. La principal diferencia entre `|` y otros símbolos es que `|` **mantiene los saltos de línea**, mientras que el símbolo `>` (usado en lugar de `|`) **combina las líneas en una sola línea**.**
+
+### **Ejemplo con `|`:**
+
+```yaml
+entrypoint:
+  - /bin/sh
+  - -c
+  - |
+    until nc -zv mongo-demo 27017; do
+      echo "Waiting For Mongo";
+      sleep 1;
+    done;
+    exec /sbin/tini -- /docker-entrypoint.sh
+```
+
+- **Aquí, el contenido después de `|` se interpreta como un bloque de texto, y las líneas de código en el `entrypoint` se mantienen con saltos de línea y formato original.**
+
+- **¿Qué ocurre con las nuevas líneas?**
+
+- **En el ejemplo anterior, el texto tiene saltos de línea donde corresponde:**
+
+- *Las líneas dentro del bloque `|` se conservan con saltos de línea, por lo que el comando `until nc -zv mongo-demo 27017` y el comando `exec /sbin/tini -- /docker-entrypoint.sh` aparecerán en líneas separadas en el contenedor.*
+  
+**Resumen:**
+
+- **`|`** *conserva los saltos de línea y mantiene la indentación tal cual.*
+- *Se usa para declarar bloques de texto donde se necesita preservar la estructura de las líneas (por ejemplo, en comandos complejos o scripts).*
+
+- *Si usaras `>` en lugar de `|`, las líneas se concatenarían y el resultado final sería una sola línea.*
