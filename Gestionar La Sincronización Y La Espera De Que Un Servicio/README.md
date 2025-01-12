@@ -59,6 +59,20 @@ services:
 wget https://raw.githubusercontent.com/vishnubob/wait-for-it/refs/heads/master/wait-for-it.sh
 ```
 
+```bash
+wget https://raw.githubusercontent.com/vishnubob/wait-for-it/refs/heads/master/wait-for-it.sh
+--2025-01-12 17:30:14--  https://raw.githubusercontent.com/vishnubob/wait-for-it/refs/heads/master/wait-for-it.sh
+Resolviendo raw.githubusercontent.com (raw.githubusercontent.com)... 2606:50c0:8000::154, 2606:50c0:8003::154, 2606:50c0:8001::154, ...
+Conectando con raw.githubusercontent.com (raw.githubusercontent.com)[2606:50c0:8000::154]:443... conectado.
+Petición HTTP enviada, esperando respuesta... 200 OK
+Longitud: 5227 (5.1K) [text/plain]
+Guardando como: ‘wait-for-it.sh’
+
+wait-for-it.sh             100%[=====================================>]   5.10K  --.-KB/s    en 0.002s  
+
+2025-01-12 17:30:15 (2.69 MB/s) - ‘wait-for-it.sh’ guardado [5227/5227]
+```
+
 ```yaml
 services:
   mongo-demo:
