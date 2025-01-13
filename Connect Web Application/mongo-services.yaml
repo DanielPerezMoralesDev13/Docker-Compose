@@ -2,21 +2,41 @@
 # GitHub: https://github.com/DanielPerezMoralesDev13
 # Correo electrónico: danielperezdev@proton.me
 
+
+secrets:
+  MONGO_DB_USERNAME:
+    file: ./secrets/MONGO_DB_USERNAME.txt
+  MONGO_DB_PWD:
+    file: ./secrets/MONGO_DB_PWD.txt
+  MONGO_INITDB_ROOT_USERNAME:
+    file: ./secrets/MONGO_INITDB_ROOT_USERNAME.txt
+  MONGO_INITDB_ROOT_PASSWORD:
+    file: ./secrets/MONGO_INITDB_ROOT_PASSWORD.txt
+  ME_CONFIG_MONGODB_ADMINUSERNAME:
+    file: ./secrets/ME_CONFIG_MONGODB_ADMINUSERNAME.txt
+  ME_CONFIG_MONGODB_ADMINPASSWORD:
+    file: ./secrets/ME_CONFIG_MONGODB_ADMINPASSWORD.txt
+  ME_CONFIG_MONGODB_URL:
+    file: ./secrets/ME_CONFIG_MONGODB_URL.txt
+  ME_CONFIG_MONGODB_AUTH_USERNAME:
+    file: ./secrets/ME_CONFIG_MONGODB_AUTH_USERNAME.txt
+  ME_CONFIG_MONGODB_AUTH_PASSWORD:
+    file: ./secrets/ME_CONFIG_MONGODB_AUTH_PASSWORD.txt
 services:
   app:
     build: .
     ports:
       - 3000:3000
     environment:
-      - MONGO_DB_USERNAME=admin
-      - MONGO_DB_PWD=supersecret
+      MONGO_DB_USERNAME: MONGO_DB_USERNAME
+      MONGO_DB_PWD: MONGO_DB_PWD
   mongo-demo:
     image: mongo:latest
     ports:
       - 27017:27017
     environment:
-      - MONGO_INITDB_ROOT_USERNAME=admin
-      - MONGO_INITDB_ROOT_PASSWORD=supersecret
+      MONGO_INITDB_ROOT_USERNAME: MONGO_INITDB_ROOT_USERNAME
+      MONGO_INITDB_ROOT_PASSWORD: MONGO_INITDB_ROOT_PASSWORD
   mongo-express:
     depends_on:
       - mongo-demo
@@ -33,17 +53,17 @@ services:
         done;
         exec /sbin/tini -- /docker-entrypoint.sh
     environment:
-      - ME_CONFIG_MONGODB_ADMINUSERNAME=admin
-      - ME_CONFIG_MONGODB_ADMINPASSWORD=supersecret
-      - ME_CONFIG_MONGODB_SERVER=mongo-demo
-      - ME_CONFIG_MONGODB_URL=mongodb://admin:supersecret@mongo-demo:27017/
-      - ME_CONFIG_MONGODB_ENABLE_ADMIN=true
-      - ME_CONFIG_OPTIONS_EDITORTHEME=material-darker
-      - ME_CONFIG_REQUEST_SIZE=100kb
-      - ME_CONFIG_SITE_BASEURL=/
-      - ME_CONFIG_SITE_COOKIESECRET=cookiesecret
-      - ME_CONFIG_SITE_SESSIONSECRET=sessionsecret
-      - ME_CONFIG_SITE_SSL_ENABLED=false
-      - ME_CONFIG_MONGODB_AUTH_USERNAME=admin
-      - ME_CONFIG_MONGODB_AUTH_PASSWORD=pass
-      - ME_CONFIG_MONGODB_PORT=27017
+      ME_CONFIG_MONGODB_ADMINUSERNAME: ME_CONFIG_MONGODB_ADMINUSERNAME
+      ME_CONFIG_MONGODB_ADMINPASSWORD: ME_CONFIG_MONGODB_ADMINPASSWORD
+      ME_CONFIG_MONGODB_SERVER: mongo-demo
+      ME_CONFIG_MONGODB_URL: ME_CONFIG_MONGODB_URL
+      ME_CONFIG_MONGODB_ENABLE_ADMIN: "true"
+      ME_CONFIG_OPTIONS_EDITORTHEME: material-darker
+      ME_CONFIG_REQUEST_SIZE: 100kb
+      ME_CONFIG_SITE_BASEURL: /
+      ME_CONFIG_SITE_COOKIESECRET: cookiesecret
+      ME_CONFIG_SITE_SESSIONSECRET: sessionsecret
+      ME_CONFIG_SITE_SSL_ENABLED: false
+      ME_CONFIG_MONGODB_AUTH_USERNAME: ME_CONFIG_MONGODB_AUTH_USERNAME
+      ME_CONFIG_MONGODB_AUTH_PASSWORD: ME_CONFIG_MONGODB_AUTH_PASSWORD
+      ME_CONFIG_MONGODB_PORT: "27017"

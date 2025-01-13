@@ -4,20 +4,103 @@
 
 # **Connect App**
 
-Borramos las redes y contenedores innecsarios
+## **Eliminación de contenedores y redes innecesarios**
+
+**El siguiente comando elimina todos los contenedores y redes específicas asociadas al proyecto, lo que ayuda a mantener un entorno limpio antes de desplegar servicios con Docker Compose:**
 
 ```bash
-docker rm -f $(docker ps -aq);
-docker network rm version4mongoservices_default;
+docker rm -f $(docker ps -aq); # Elimina Todos Los Contenedores (En Ejecución O Detenidos)
+docker network rm version4mongoservices_default; # Elimina La Red Creada Automáticamente Por Docker Compose
 ```
 
-docker compose puede construir imagenes
+### **Definición de variables de entorno en YAML**
 
-para evitar que docker compose up y podamos sobre escribir el nombre por defecto usamos --project-name value
+- **Docker Compose permite definir variables de entorno en dos formatos:**
+
+1. **Lista de strings (`- KEY=value`):**
+
+   ```yaml
+   environment:
+     - MONGO_DB_USERNAME=admin
+     - MONGO_DB_PWD=supersecret
+   ```
+
+2. **Mapa clave-valor (`KEY: value`):**
+   **Este formato es más legible y común en archivos YAML:**
+
+   ```yaml
+   environment:
+     MONGO_DB_USERNAME: admin
+     MONGO_DB_PWD: supersecret
+   ```
+
+### **Construcción de imágenes personalizadas**
+
+*Docker Compose puede construir imágenes usando un `Dockerfile`. Cuando especificas `build: .` en la definición del servicio, Compose buscará un `Dockerfile` en el directorio actual y construirá la imagen antes de iniciar el contenedor:*
+
+```yaml
+# Autor: Daniel Benjamin Perez Morales
+# GitHub: https://github.com/DanielPerezMoralesDev13
+# Correo electrónico: danielperezdev@proton.me
+
+services:
+  app:
+    build: .
+    ports:
+      - 3000:3000
+    environment:
+      - MONGO_DB_USERNAME: admin
+      - MONGO_DB_PWD: supersecret
+  mongo-demo:
+    image: mongo:latest
+    ports:
+      - 27017:27017
+    environment:
+      - MONGO_INITDB_ROOT_USERNAME: admin
+      - MONGO_INITDB_ROOT_PASSWORD: supersecret
+  mongo-express:
+    depends_on:
+      - mongo-demo
+    image: mongo-express
+    ports:
+      - 8081:8081
+    entrypoint:
+      - /bin/sh
+      - -c
+      - |
+        until nc -zv mongo-demo 27017; do
+          echo "Waiting For Mongo";
+          sleep 1;
+        done;
+        exec /sbin/tini -- /docker-entrypoint.sh
+    environment:
+      - ME_CONFIG_MONGODB_ADMINUSERNAME: admin
+      - ME_CONFIG_MONGODB_ADMINPASSWORD: supersecret
+      - ME_CONFIG_MONGODB_SERVER: mongo-demo
+      - ME_CONFIG_MONGODB_URL: mongodb://admin:supersecret@mongo-demo:27017/
+      - ME_CONFIG_MONGODB_ENABLE_ADMIN: true
+      - ME_CONFIG_OPTIONS_EDITORTHEME: material-darker
+      - ME_CONFIG_REQUEST_SIZE: 100kb
+      - ME_CONFIG_SITE_BASEURL: /
+      - ME_CONFIG_SITE_COOKIESECRET: cookiesecret
+      - ME_CONFIG_SITE_SESSIONSECRET: sessionsecret
+      - ME_CONFIG_SITE_SSL_ENABLED: false
+      - ME_CONFIG_MONGODB_AUTH_USERNAME: admin
+      - ME_CONFIG_MONGODB_AUTH_PASSWORD: pass
+      - ME_CONFIG_MONGODB_PORT: 27017
+```
+
+## **Personalización del proyecto con `--project-name`**
+
+*Cuando usas `docker compose up`, Docker Compose genera nombres automáticos para los contenedores, redes y otros recursos. Estos nombres están basados en el nombre del directorio y del servicio. Si deseas personalizar el nombre del proyecto (y evitar el uso del nombre del directorio), utiliza la opción `--project-name`:*
 
 ```bash
 docker compose --project-name project -f mongo-services.yaml up -d
 ```
+
+- **Ventajas de usar `--project-name`:**
+  - *Define un nombre lógico para el proyecto.*
+  - *Evita conflictos de nombres entre proyectos que usen redes o contenedores con nombres similares.*
 
 ```bash
 docker compose --project-name project -f mongo-services.yaml up -d
@@ -60,11 +143,32 @@ docker compose --project-name project -f mongo-services.yaml up -d
  ✔ Container project-mongo-express-1  Started                                                                                    0.9s
 ```
 
+### **Creación de una Base De Datos Y Colección**
+
+- **Insertamos Datos**
+
+```json
+{
+    "_id": ObjectId(),
+     "myid": 1,
+     "data": "Daniel Benjamin Perez Morales"
+}
+```
+
+#### **Prueba de la API**
+
+**Realiza una solicitud GET a la API para comprobar que los datos están disponibles:**
+
 - **Respuesta**
 
 ```bash
 curl -X GET http://localhost:3000/
 ```
+
+*Esto debería devolver la página HTML dinámica, que incluye:*
+
+- *Datos estáticos.*
+- *Datos obtenidos de MongoDB y mostrados dinámicamente.*
 
 ```html
 <html lang="en">
