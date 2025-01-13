@@ -513,12 +513,24 @@ Options:
 - **`--since <timestamp>`:**
   - *Muestra los logs generados después de un momento específico.*
   - **Ejemplos de formato:**
-    - *Duración relativa: `10m` (últimos 10 minutos), `2h` (últimas 2 horas).*
-    - *Fecha absoluta: `2025-01-12T15:00:00`.*
+    - *Duración relativa:*
+      - **`10m`:** *Logs generados en los últimos 10 minutos.*
+      - **`2h`:** *Logs generados en las últimas 2 horas.*
+      - **`1d`:** *Logs generados en el último día.*
+    - *Fecha absoluta:*
+      - **`2025-01-12T15:00:00`:** *Logs desde las 3:00 PM UTC del 12 de enero de 2025.*
+      - **`2025-01-12`:** *Logs desde la medianoche UTC del 12 de enero de 2025.*
 
 - **`--until <timestamp>`:**
   - *Muestra los logs generados antes de un momento específico.*
-  - *Formatos de timestamp similares a `--since`.*
+  - **Ejemplos de formato:**
+    - *Duración relativa:*
+      - **`5m`:** *Logs generados hasta hace 5 minutos.*
+      - **`3h`:** *Logs generados hasta hace 3 horas.*
+      - **`1d`:** *Logs generados hasta hace un día.*
+    - *Fecha absoluta:*
+      - **`2025-01-12T18:00:00`:** *Logs hasta las 6:00 PM UTC del 12 de enero de 2025.*
+      - **`2025-01-11`:** *Logs hasta el final del día (23:59:59 UTC) del 11 de enero de 2025.*
 
 ---
 
