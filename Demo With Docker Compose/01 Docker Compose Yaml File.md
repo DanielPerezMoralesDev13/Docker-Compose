@@ -166,3 +166,91 @@ services:
       - ME_CONFIG_MONGODB_AUTH_PASSWORD=pass
       - ME_CONFIG_MONGODB_PORT=27017
 ```
+
+### **Asignación de nombres y red por defecto en `docker compose up`**
+
+- *Cuando se ejecuta `docker compose up`, Docker asigna nombres y redes automáticamente si no se especifican explícitamente en el archivo de configuración (`docker-compose.yml`) o mediante opciones. Esto sigue un patrón estándar:*
+
+---
+
+#### **1. Nombres de los contenedores:**
+
+- **Formato por defecto:**
+
+  ```bash
+  <name_directory>_<name_service>_<num>
+  ```
+
+  - **`<name_directory>`:** *Nombre del directorio donde se encuentra el archivo `docker-compose.yml`.*
+  - **`<name_service>`:** *Nombre del servicio definido en el archivo `docker-compose.yml`.*
+  - **`<num>`:** *Número incremental asignado a los contenedores del mismo servicio.*
+
+- **Ejemplo:**
+  - *Carpeta: `project1/`*
+  - *Servicio definido en `docker-compose.yml`:*
+
+    ```yaml
+    services:
+      web:
+        image: nginx
+    ```
+
+  - **Nombre del contenedor generado:**
+
+    ```bash
+    project1_web_1
+    ```
+
+---
+
+#### **2. Red asignada por defecto:**
+
+- **Formato por defecto:**
+
+  ```bash
+  <name_directory>_default
+  ```
+
+  - *Docker crea automáticamente una red tipo `bridge` para los servicios definidos en el archivo `docker-compose.yml`.*
+  - *Esta red es privada para los contenedores del mismo archivo y permite la comunicación interna entre ellos.*
+
+- **Ejemplo:**
+  - *Carpeta: `project1/`*
+  - *Red creada automáticamente:*
+
+    ```bash
+    project1_default
+    ```
+
+---
+
+#### **Ejemplo completo:**
+
+**Archivo `docker-compose.yml`:**
+
+```yaml
+services:
+  db:
+    image: postgres
+  app:
+    image: myapp
+```
+
+**Ejecución:**
+
+```bash
+docker compose up
+```
+
+- **Nombres de los contenedores generados:**
+
+  ```bash
+  project1_db_1
+  project1_app_1
+  ```
+
+- **Red creada:**
+
+  ```bash
+  project1_default
+  ```
