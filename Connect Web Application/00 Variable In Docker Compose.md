@@ -102,7 +102,8 @@ export MONGO_INITDB_ROOT_USERNAME=admin;
 export MONGO_INITDB_ROOT_PASSWORD=supersecret;
 export ME_CONFIG_MONGODB_ADMINUSERNAME=admin;
 export ME_CONFIG_MONGODB_ADMINPASSWORD=supersecret;
-export ME_CONFIG_MONGODB_URL=mongodb://admin:supersecret@mongo-demo:27017/
+export ME_CONFIG_MONGODB_SERVER=mongo-demo;
+export ME_CONFIG_MONGODB_URL=mongodb://admin:supersecret@mongo-demo:27017/;
 export ME_CONFIG_MONGODB_AUTH_USERNAME=admin;
 export ME_CONFIG_MONGODB_AUTH_PASSWORD=pass;
 ```

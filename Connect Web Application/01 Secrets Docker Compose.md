@@ -22,18 +22,52 @@
 
 #### **Cómo usar secrets en Docker Compose**
 
-##### **Paso 1: Crear archivos para los secrets**
+### **Mejor explicación sobre variables de entorno que terminan con _FILE**
 
-**Crea un archivo con el contenido del secret. Por ejemplo:**
+- *En Docker, cuando usamos variables de entorno que terminan en `_FILE`, estas son utilizadas para hacer referencia a archivos de secretos dentro del contenedor en lugar de almacenar directamente valores sensibles como contraseñas o claves en las variables de entorno.*
+
+#### **¿Por qué usar las variables que terminan en `_FILE`?**
+
+- *Algunas imágenes de Docker, como las de bases de datos (por ejemplo, `mongo`), soportan esta convención para evitar exponer credenciales de manera directa dentro de las variables de entorno. La imagen puede leer el contenido del archivo en la ruta especificada (`/run/secrets/filename`) y usarlo como si fuera el valor de la variable de entorno.*
+
+- *Por ejemplo, en el caso de MongoDB, la variable de entorno `MONGO_INITDB_ROOT_PASSWORD_FILE` indicará a la imagen que lea el archivo `/run/secrets/MONGO_INITDB_ROOT_PASSWORD` para obtener la contraseña del usuario raíz, en lugar de almacenar la contraseña directamente en la variable.*
+
+#### **Ventajas**
+
+- **Seguridad:** *Al mantener los secretos fuera de las variables de entorno, se reduce la posibilidad de exposición accidental.*
+- **Facilidad de manejo:** *Usar archivos de secretos permite una mejor gestión de credenciales y otros valores sensibles en entornos de producción.*
+
+### **Ejemplo técnico con Docker Compose**
+
+*Al usar la directiva `secrets` en un archivo `docker-compose.yaml`, se puede definir el origen de los secretos y su correspondiente referencia en las variables de entorno. Cuando se utiliza la convención de `_FILE`, las aplicaciones como MongoDB pueden leer automáticamente los valores de los archivos secretos.*
+
+*Aquí tienes una explicación más detallada y una corrección del ejemplo original que incluye este uso adecuado de las variables de entorno y los secretos:*
+
+---
+
+### **Paso 1: Crear archivos para los secrets**
+
+**Primero, crea los archivos que contendrán los secretos:**
 
 ```bash
-echo "supersecretpassword" > mongo_root_password.txt
-echo "adminpassword" > mongo_admin_password.txt
+mkdir -p ./secrets
+echo "admin" > ./secrets/MONGO_DB_USERNAME.txt
+echo "supersecret" > ./secrets/MONGO_DB_PWD.txt
+echo "admin" > ./secrets/MONGO_INITDB_ROOT_USERNAME.txt
+echo "supersecret" > ./secrets/MONGO_INITDB_ROOT_PASSWORD.txt
+echo "admin" > ./secrets/ME_CONFIG_MONGODB_ADMINUSERNAME.txt
+echo "supersecret" > ./secrets/ME_CONFIG_MONGODB_ADMINPASSWORD.txt
+echo "mongo-demo" > ./secrets/ME_CONFIG_MONGODB_SERVER.txt
+echo "mongodb://admin:supersecret@mongo-demo:27017/" > ./secrets/ME_CONFIG_MONGODB_URL.txt
+echo "admin" > ./secrets/ME_CONFIG_MONGODB_AUTH_USERNAME.txt
+echo "pass" > ./secrets/ME_CONFIG_MONGODB_AUTH_PASSWORD.txt
 ```
 
-##### **Paso 2: Definir secrets en `docker-compose.yaml`**
+---
 
-**Define los secrets en la sección `secrets` y especifica su origen:**
+### **Paso 2: Definir los secrets en `docker-compose.yaml`**
+
+*En el archivo `docker-compose.yaml`, define los secretos y su origen (en este caso, desde los archivos creados previamente):*
 
 ```yaml
 # Autor: Daniel Benjamin Perez Morales
@@ -41,41 +75,102 @@ echo "adminpassword" > mongo_admin_password.txt
 # Correo electrónico: danielperezdev@proton.me
 
 secrets:
-  mongo_root_password:
-    file: ./mongo_root_password.txt
-  mongo_admin_password:
-    file: ./mongo_admin_password.txt
+  MONGO_DB_USERNAME:
+    file: ./secrets/MONGO_DB_USERNAME.txt
+  MONGO_DB_PWD:
+    file: ./secrets/MONGO_DB_PWD.txt
+  MONGO_INITDB_ROOT_USERNAME:
+    file: ./secrets/MONGO_INITDB_ROOT_USERNAME.txt
+  MONGO_INITDB_ROOT_PASSWORD:
+    file: ./secrets/MONGO_INITDB_ROOT_PASSWORD.txt
+  ME_CONFIG_MONGODB_ADMINUSERNAME:
+    file: ./secrets/ME_CONFIG_MONGODB_ADMINUSERNAME.txt
+  ME_CONFIG_MONGODB_ADMINPASSWORD:
+    file: ./secrets/ME_CONFIG_MONGODB_ADMINPASSWORD.txt
+  ME_CONFIG_MONGODB_SERVER:
+    file: ./secrets/ME_CONFIG_MONGODB_SERVER.txt
+  ME_CONFIG_MONGODB_URL:
+    file: ./secrets/ME_CONFIG_MONGODB_URL.txt
+  ME_CONFIG_MONGODB_AUTH_USERNAME:
+    file: ./secrets/ME_CONFIG_MONGODB_AUTH_USERNAME.txt
+  ME_CONFIG_MONGODB_AUTH_PASSWORD:
+    file: ./secrets/ME_CONFIG_MONGODB_AUTH_PASSWORD.txt
 
 services:
+  app:
+    build: .
+    ports:
+      - 3000:3000
+    secrets:
+      - MONGO_DB_USERNAME
+      - MONGO_DB_PWD
+    environment:
+      MONGO_DB_USERNAME_FILE: /run/secrets/MONGO_DB_USERNAME
+      MONGO_DB_PWD_FILE: /run/secrets/MONGO_DB_PWD
+
   mongo-demo:
     image: mongo:latest
     ports:
       - 27017:27017
     secrets:
-      - mongo_root_password
-      - mongo_admin_password
+      - MONGO_INITDB_ROOT_USERNAME
+      - MONGO_INITDB_ROOT_PASSWORD
     environment:
-      MONGO_INITDB_ROOT_USERNAME: root
-      MONGO_INITDB_ROOT_PASSWORD_FILE: /run/secrets/mongo_root_password
+      MONGO_INITDB_ROOT_USERNAME_FILE: /run/secrets/MONGO_INITDB_ROOT_USERNAME
+      MONGO_INITDB_ROOT_PASSWORD_FILE: /run/secrets/MONGO_INITDB_ROOT_PASSWORD
+
   mongo-express:
+    depends_on:
+      - mongo-demo
     image: mongo-express
     ports:
       - 8081:8081
+    entrypoint:
+      - /bin/sh
+      - -c
+      - |
+        until nc -zv mongo-demo 27017; do
+          echo "Waiting For Mongo";
+          sleep 1;
+        done;
+        exec /sbin/tini -- /docker-entrypoint.sh
     secrets:
-      - mongo_admin_password
+      - ME_CONFIG_MONGODB_ADMINUSERNAME
+      - ME_CONFIG_MONGODB_ADMINPASSWORD
+      - ME_CONFIG_MONGODB_SERVER
+      - ME_CONFIG_MONGODB_URL
+      - ME_CONFIG_MONGODB_AUTH_USERNAME
+      - ME_CONFIG_MONGODB_AUTH_PASSWORD
     environment:
-      ME_CONFIG_MONGODB_ADMINUSERNAME: admin
-      ME_CONFIG_MONGODB_ADMINPASSWORD_FILE: /run/secrets/mongo_admin_password
+      ME_CONFIG_MONGODB_ADMINUSERNAME_FILE: /run/secrets/ME_CONFIG_MONGODB_ADMINUSERNAME
+      ME_CONFIG_MONGODB_ADMINPASSWORD_FILE: /run/secrets/ME_CONFIG_MONGODB_ADMINPASSWORD
+      ME_CONFIG_MONGODB_SERVER_FILE: /run/secrets/ME_CONFIG_MONGODB_SERVER
+      ME_CONFIG_MONGODB_URL_FILE: /run/secrets/ME_CONFIG_MONGODB_URL
+      ME_CONFIG_MONGODB_AUTH_USERNAME_FILE: /run/secrets/ME_CONFIG_MONGODB_AUTH_USERNAME
+      ME_CONFIG_MONGODB_AUTH_PASSWORD_FILE: /run/secrets/ME_CONFIG_MONGODB_AUTH_PASSWORD
+      ME_CONFIG_MONGODB_ENABLE_ADMIN: "true"
+      ME_CONFIG_OPTIONS_EDITORTHEME: material-darker
+      ME_CONFIG_REQUEST_SIZE: 100kb
+      ME_CONFIG_SITE_BASEURL: /
+      ME_CONFIG_SITE_COOKIESECRET: cookiesecret
+      ME_CONFIG_SITE_SESSIONSECRET: sessionsecret
+      ME_CONFIG_SITE_SSL_ENABLED: false
+      ME_CONFIG_MONGODB_PORT: "27017"
 ```
 
 ---
 
-#### **Paso 3: Usar secrets en los servicios**
+### **Paso 3: Explicación técnica sobre el uso de `_FILE`**
 
-**En este ejemplo:**
+1. **Variables de entorno `_FILE`:** *Al utilizar variables como `MONGO_INITDB_ROOT_PASSWORD_FILE`, Docker lee el archivo de secreto en la ubicación `/run/secrets/<name_secret>` en lugar de pasar el valor directamente en la variable de entorno. Esto es útil para mantener los secretos (como contraseñas y claves) fuera de las variables de entorno, lo que mejora la seguridad.*
 
-1. *Los secrets están montados en el contenedor en la ruta `/run/secrets/<secret_name>`.*
-2. *Las variables de entorno (como `MONGO_INITDB_ROOT_PASSWORD_FILE`) hacen referencia a los archivos de secrets en lugar de valores directos.*
+2. **Cómo funciona:** *En el servicio de `mongo-demo`, las variables de entorno como `MONGO_INITDB_ROOT_USERNAME_FILE` y `MONGO_INITDB_ROOT_PASSWORD_FILE` están apuntando a archivos dentro de `/run/secrets/`, donde Docker almacena los secretos de manera segura. Las imágenes que soportan esta convención (como la de `mongo` y `mongo-express`) serán capaces de leer el contenido de estos archivos y utilizarlos para configurar el contenedor de manera automática.*
+
+---
+
+### **Resumen:**
+
+*Usar variables de entorno que terminan en `_FILE` es una práctica recomendada cuando se manejan secretos en Docker, especialmente para bases de datos y otros servicios que soportan este patrón. Esta práctica ayuda a mantener los secretos más seguros al no exponerlos directamente en las variables de entorno, sino que se leen de archivos secretos montados en el contenedor.*
 
 ---
 
