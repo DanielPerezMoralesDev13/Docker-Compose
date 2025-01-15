@@ -5,7 +5,7 @@
 # Usa la imagen oficial de Nginx como base
 FROM nginx:alpine
 
-# Copia archivos de configuración (si los tienes)
+# Copia ficheros de configuración (si tienes)
 # COPY ./nginx.conf /etc/nginx/nginx.conf
 
 # Define el puerto en el que escucha el servidor
@@ -13,7 +13,7 @@ EXPOSE 80
 
 # HealthCheck para verificar que el servidor responde a peticiones HTTP en el puerto 80
 HEALTHCHECK --interval=30s --timeout=5s --retries=3 \
-  CMD curl --silent --fail http://localhost/ || exit 1
+    CMD curl --silent --fail http://localhost/ || exit 1
 
 # Comando para iniciar Nginx (por defecto ya está definido en la imagen oficial)
 CMD ["nginx", "-g", "daemon off;"]

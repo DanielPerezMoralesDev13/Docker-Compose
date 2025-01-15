@@ -26,7 +26,7 @@ docker network rm version4mongoservices_default; # Elimina La Red Creada Automá
    ```
 
 2. **Mapa clave-valor (`KEY: value`):**
-   **Este formato es más legible y común en archivos YAML:**
+   **Este formato es más legible y común en ficheros YAML:**
 
    ```yaml
    environment:

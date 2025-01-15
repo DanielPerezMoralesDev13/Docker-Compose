@@ -175,7 +175,7 @@ Este es un fichero de prueba
 docker run -itu root:root -w /App --mount type=volume,source=my-volume,target=/App --name rw-mount-container ubuntu:latest
 ```
 
-**Prueba creando y leyendo archivos:**
+**Prueba creando y leyendo ficheros:**
 
 ```bash
 echo "Fichero creado con --mount" > /App/mount-test.txt
@@ -236,7 +236,7 @@ bash: /App/no-write.txt: Read-only file system
 *Docker no admite volúmenes con permisos "solo escritura" de manera nativa, pero podemos simular este comportamiento mediante permisos del sistema operativo dentro del contenedor.*
 
 > [!WARNING]
-> **Al ser root dentro del contenedor, puedes ignorar ciertos permisos del sistema de archivos,**
+> **Al ser root dentro del contenedor, puedes ignorar ciertos permisos del sistema de ficheros,**
 
 **Montamos el volumen y cambiamos los permisos del sistema operativo dentro del contenedor:**
 
@@ -396,7 +396,7 @@ echo "Fichero solo escritura" > /App/write-only.txt
 sudo lsd -lA --tree /var/lib/docker/volumes/my-volume/_data
 ```
 
-*Deberías ver los archivos creados desde los diferentes contenedores, excepto en los casos donde el acceso estaba restringido.*
+*Deberías ver los ficheros creados desde los diferentes contenedores, excepto en los casos donde el acceso estaba restringido.*
 
 ---
 

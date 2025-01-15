@@ -6,7 +6,7 @@
 
 ## **El problema de las credenciales en el fichero `docker-compose.yaml`**
 
-*Cuando colocas credenciales directamente dentro del fichero `docker-compose.yaml`, estás expuesto a un riesgo de seguridad. Si el fichero se comparte o se sube a un repositorio público, las credenciales podrían ser comprometidas fácilmente. **Por lo tanto, es fundamental evitar hardcodear valores sensibles en los archivos de configuración.***
+*Cuando colocas credenciales directamente dentro del fichero `docker-compose.yaml`, estás expuesto a un riesgo de seguridad. Si el fichero se comparte o se sube a un repositorio público, las credenciales podrían ser comprometidas fácilmente. **Por lo tanto, es fundamental evitar hardcodear valores sensibles en los ficheros de configuración.***
 
 ### **Solución: Usar variables de entorno**
 

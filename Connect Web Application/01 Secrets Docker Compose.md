@@ -27,7 +27,7 @@
 
 ### **Mejor explicación sobre variables de entorno que terminan con _FILE**
 
-- *En Docker, cuando usamos variables de entorno que terminan en `_FILE`, estas son utilizadas para hacer referencia a archivos de secretos dentro del contenedor en lugar de almacenar directamente valores sensibles como contraseñas o claves en las variables de entorno.*
+- *En Docker, cuando usamos variables de entorno que terminan en `_FILE`, estas son utilizadas para hacer referencia a ficheros de secretos dentro del contenedor en lugar de almacenar directamente valores sensibles como contraseñas o claves en las variables de entorno.*
 
 #### **¿Por qué usar las variables que terminan en `_FILE`?**
 
@@ -38,19 +38,19 @@
 #### **Ventajas**
 
 - **Seguridad:** *Al mantener los secretos fuera de las variables de entorno, se reduce la posibilidad de exposición accidental.*
-- **Facilidad de manejo:** *Usar archivos de secretos permite una mejor gestión de credenciales y otros valores sensibles en entornos de producción.*
+- **Facilidad de manejo:** *Usar ficheros de secretos permite una mejor gestión de credenciales y otros valores sensibles en entornos de producción.*
 
 ### **Ejemplo técnico con Docker Compose**
 
-*Al usar la directiva `secrets` en un fichero `docker-compose.yaml`, se puede definir el origen de los secretos y su correspondiente referencia en las variables de entorno. Cuando se utiliza la convención de `_FILE`, las aplicaciones como MongoDB pueden leer automáticamente los valores de los archivos secretos.*
+*Al usar la directiva `secrets` en un fichero `docker-compose.yaml`, se puede definir el origen de los secretos y su correspondiente referencia en las variables de entorno. Cuando se utiliza la convención de `_FILE`, las aplicaciones como MongoDB pueden leer automáticamente los valores de los ficheros secretos.*
 
 *Aquí tienes una explicación más detallada y una corrección del ejemplo original que incluye este uso adecuado de las variables de entorno y los secretos:*
 
 ---
 
-### **Paso 1: Crear archivos para los secrets**
+### **Paso 1: Crear ficheros para los secrets**
 
-**Primero, crea los archivos que contendrán los secretos:**
+**Primero, crea los ficheros que contendrán los secretos:**
 
 ```bash
 mkdir -p ./secrets
@@ -70,7 +70,7 @@ echo "pass" > ./secrets/ME_CONFIG_MONGODB_AUTH_PASSWORD.txt
 
 ### **Paso 2: Definir los secrets en `docker-compose.yaml`**
 
-*En el fichero `docker-compose.yaml`, define los secretos y su origen (en este caso, desde los archivos creados previamente):*
+*En el fichero `docker-compose.yaml`, define los secretos y su origen (en este caso, desde los ficheros creados previamente):*
 
 ```yaml
 # Autor: Daniel Benjamin Perez Morales
@@ -167,13 +167,13 @@ services:
 
 1. **Variables de entorno `_FILE`:** *Al utilizar variables como `MONGO_INITDB_ROOT_PASSWORD_FILE`, Docker lee el fichero de secreto en la ubicación `/run/secrets/<name_secret>` en lugar de pasar el valor directamente en la variable de entorno. Esto es útil para mantener los secretos (como contraseñas y claves) fuera de las variables de entorno, lo que mejora la seguridad.*
 
-2. **Cómo funciona:** *En el servicio de `mongo-demo`, las variables de entorno como `MONGO_INITDB_ROOT_USERNAME_FILE` y `MONGO_INITDB_ROOT_PASSWORD_FILE` están apuntando a archivos dentro de `/run/secrets/`, donde Docker almacena los secretos de manera segura. Las imágenes que soportan esta convención (como la de `mongo` y `mongo-express`) serán capaces de leer el contenido de estos archivos y utilizarlos para configurar el contenedor de manera automática.*
+2. **Cómo funciona:** *En el servicio de `mongo-demo`, las variables de entorno como `MONGO_INITDB_ROOT_USERNAME_FILE` y `MONGO_INITDB_ROOT_PASSWORD_FILE` están apuntando a ficheros dentro de `/run/secrets/`, donde Docker almacena los secretos de manera segura. Las imágenes que soportan esta convención (como la de `mongo` y `mongo-express`) serán capaces de leer el contenido de estos ficheros y utilizarlos para configurar el contenedor de manera automática.*
 
 ---
 
 ### **Resumen:**
 
-*Usar variables de entorno que terminan en `_FILE` es una práctica recomendada cuando se manejan secretos en Docker, especialmente para bases de datos y otros servicios que soportan este patrón. Esta práctica ayuda a mantener los secretos más seguros al no exponerlos directamente en las variables de entorno, sino que se leen de archivos secretos montados en el contenedor.*
+*Usar variables de entorno que terminan en `_FILE` es una práctica recomendada cuando se manejan secretos en Docker, especialmente para bases de datos y otros servicios que soportan este patrón. Esta práctica ayuda a mantener los secretos más seguros al no exponerlos directamente en las variables de entorno, sino que se leen de ficheros secretos montados en el contenedor.*
 
 ---
 
@@ -214,11 +214,11 @@ services:
 
 #### **Mejores prácticas al usar secrets**
 
-1. **Mantén los archivos de secrets fuera del control de versiones:**
-   - *Agrega los archivos de secrets a `.gitignore` para evitar comprometerlos.*
+1. **Mantén los ficheros de secrets fuera del control de versiones:**
+   - *Agrega los ficheros de secrets a `.gitignore` para evitar comprometerlos.*
 
 2. **Usa permisos adecuados:**
-   - *Asegúrate de que los archivos de secrets tengan permisos restringidos:*
+   - *Asegúrate de que los ficheros de secrets tengan permisos restringidos:*
 
      ```bash
      chmod 600 mongo_root_password.txt mongo_admin_password.txt

@@ -25,7 +25,7 @@
 
 - **`-p`** *y **`-l`** son **opciones** que se pasan al comando `bash` para modificar su comportamiento.*
   - **`-p`:** *La opción `-p` indica que **bash** debe iniciar con un entorno "protegido". Esto significa que ciertas variables del entorno, como `$PATH`, no se modificarán, lo que podría ser útil en algunos casos donde se necesita un entorno de ejecución más controlado.*
-  - **`-l`:** *La opción `-l` le dice a `bash` que debe actuar como un **shell de login**, lo que significa que se ejecutarán ciertos archivos de configuración del sistema (como `.bash_profile`, `.bashrc`, etc.), lo cual es típico cuando inicias sesión interactiva en un terminal. Esto es importante si el script necesita acceder a configuraciones del entorno que solo se cargan en un shell de login.*
+  - **`-l`:** *La opción `-l` le dice a `bash` que debe actuar como un **shell de login**, lo que significa que se ejecutarán ciertos ficheros de configuración del sistema (como `.bash_profile`, `.bashrc`, etc.), lo cual es típico cuando inicias sesión interactiva en un terminal. Esto es importante si el script necesita acceder a configuraciones del entorno que solo se cargan en un shell de login.*
 
 ### **Resumen completo**
 

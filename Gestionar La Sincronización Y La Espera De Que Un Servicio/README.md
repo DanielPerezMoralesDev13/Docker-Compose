@@ -97,7 +97,7 @@ services:
 
 *[Wait For It](https://stackoverflow.com/questions/63198731/how-to-use-wait-for-it-in-docker-compose-file "https://stackoverflow.com/questions/63198731/how-to-use-wait-for-it-in-docker-compose-file")*
 
-- **`dockerize`** *tiene más opciones y funcionalidades, como esperar por servicios TCP, archivos o HTTP, lo que lo hace más flexible en algunos escenarios.*
+- **`dockerize`** *tiene más opciones y funcionalidades, como esperar por servicios TCP, ficheros o HTTP, lo que lo hace más flexible en algunos escenarios.*
 - **`wait-for-it.sh`** *es una solución más simple y ligera, ideal si solo necesitas esperar un puerto específico.*
 
 *Ambas herramientas son útiles para evitar problemas de sincronización en contenedores Docker, garantizando que los servicios dependientes estén listos antes de intentar interactuar con ellos.*

@@ -52,7 +52,7 @@
      - *`docker-compose up` crea y arranca los contenedores.*
      - *`docker-compose down` detiene y elimina contenedores, redes y volúmenes definidos.*
    - **Escenarios multi-stage:**
-     - *Puedes definir configuraciones específicas por entorno usando múltiples archivos YAML (`-f` flag) o variables de entorno.*
+     - *Puedes definir configuraciones específicas por entorno usando múltiples ficheros YAML (`-f` flag) o variables de entorno.*
 
 4. **Orquestación y dependencias:**
    - *Gestiona la relación entre contenedores usando directivas como `depends_on`, asegurando que ciertos contenedores inicien antes que otros. Sin embargo, no gestiona órdenes precisas de inicialización, dejando esto a estrategias adicionales.*

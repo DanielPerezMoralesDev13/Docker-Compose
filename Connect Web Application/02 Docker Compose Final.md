@@ -7,7 +7,7 @@
 ## **Desglose del comando**
 
 1. **`docker compose`:**
-   *Este es el comando principal para interactuar con Docker Compose, una herramienta que te permite definir y ejecutar aplicaciones multicontenedor en Docker usando archivos YAML.*
+   *Este es el comando principal para interactuar con Docker Compose, una herramienta que te permite definir y ejecutar aplicaciones multicontenedor en Docker usando ficheros YAML.*
 
 2. **`--project-name project`:**
    *Establece un nombre específico para el proyecto que se va a ejecutar. En este caso, el proyecto se llama `project`. Esto se usa para agrupar y distinguir los contenedores, redes y volúmenes creados por este proyecto. Si no se especifica, Docker Compose usará el nombre del directorio donde se ejecuta el comando.*
@@ -25,7 +25,7 @@
    *Añade marcas de tiempo a los logs de los contenedores cuando los contenedores se ejecutan. Esto te permite ver exactamente cuándo ocurren los eventos dentro de los contenedores.*
 
 7. **`--build`:**
-   *Fuerza la reconstrucción de las imágenes de los servicios antes de iniciar los contenedores. Esto es útil si has hecho cambios en los archivos de Docker o en el contexto de construcción de las imágenes y quieres asegurarte de que los contenedores utilicen las versiones más recientes de las imágenes.*
+   *Fuerza la reconstrucción de las imágenes de los servicios antes de iniciar los contenedores. Esto es útil si has hecho cambios en los ficheros de Docker o en el contexto de construcción de las imágenes y quieres asegurarte de que los contenedores utilicen las versiones más recientes de las imágenes.*
 
 ### **Resumen**
 

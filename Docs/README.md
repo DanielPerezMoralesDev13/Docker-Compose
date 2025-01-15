@@ -91,5 +91,5 @@
 
 - **`.dockercfg`:** *Formato obsoleto, sencillo pero inseguro.*
 - **`config.json`:** *Formato moderno, más seguro y con soporte para configuraciones adicionales.*
-- *Ambos archivos no son intercambiables, ya que `config.json` amplía las funcionalidades y seguridad de `.dockercfg`.*
+- *Ambos ficheros no son intercambiables, ya que `config.json` amplía las funcionalidades y seguridad de `.dockercfg`.*
 - *La gestión moderna de credenciales ha evolucionado hacia el uso de sistemas de almacenamiento seguro integrados en el sistema operativo.*

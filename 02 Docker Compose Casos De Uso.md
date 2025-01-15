@@ -118,7 +118,7 @@
 
 *Docker Compose es especialmente útil cuando trabajas con una arquitectura de microservicios, ya que cada servicio (contenedor) puede ser manejado de forma independiente pero, al mismo tiempo, estar interconectado con otros servicios.*
 
-- **Caso de uso:** *Si tienes una arquitectura de microservicios, puedes tener múltiples servicios que necesitan comunicarse entre sí, como un servicio de autenticación, un servicio de pagos, un servicio de almacenamiento de archivos, etc. Docker Compose te permite definir estos servicios y sus dependencias, y los pone en marcha con un solo comando.*
+- **Caso de uso:** *Si tienes una arquitectura de microservicios, puedes tener múltiples servicios que necesitan comunicarse entre sí, como un servicio de autenticación, un servicio de pagos, un servicio de almacenamiento de ficheros, etc. Docker Compose te permite definir estos servicios y sus dependencias, y los pone en marcha con un solo comando.*
 
   **Ejemplo:**
 

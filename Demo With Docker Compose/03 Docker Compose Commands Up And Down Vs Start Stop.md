@@ -321,10 +321,10 @@ docker compose -f mongo-services.yaml down --timeout 10 --volumes --remove-orpha
 
 1. **Contenedores como entornos efímeros:**
    - *Los contenedores son entornos ligeros y temporales que ejecutan aplicaciones de forma aislada.*
-   - *Por defecto, no guardan datos permanentemente, ya que los datos se almacenan dentro del sistema de archivos del contenedor.*
+   - *Por defecto, no guardan datos permanentemente, ya que los datos se almacenan dentro del sistema de ficheros del contenedor.*
 
 2. **Persistencia de datos con volúmenes:**
-   - *Si se elimina un contenedor, **los datos almacenados en su sistema de archivos interno se pierden**.*
+   - *Si se elimina un contenedor, **los datos almacenados en su sistema de ficheros interno se pierden**.*
    - *Para preservar datos, es necesario configurar **volúmenes**. Estos permiten:*
      - *Montar directorios del host en el contenedor.*
      - *Usar volúmenes administrados por Docker, que son independientes de los contenedores.*

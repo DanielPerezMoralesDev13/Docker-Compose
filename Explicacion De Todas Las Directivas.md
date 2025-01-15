@@ -48,7 +48,7 @@ networks:
 
 #### **`volumes`**
 
-Define los volúmenes de Docker, que se usan para persistir datos entre contenedores o entre contenedores y el sistema de archivos del host.
+Define los volúmenes de Docker, que se usan para persistir datos entre contenedores o entre contenedores y el sistema de ficheros del host.
 
 Ejemplo:
 
@@ -60,7 +60,7 @@ volumes:
 
 #### **`configs`**
 
-Define configuraciones que se pueden inyectar en los contenedores. Se usan para pasar datos de configuración a los contenedores, como archivos de configuración de aplicaciones.
+Define configuraciones que se pueden inyectar en los contenedores. Se usan para pasar datos de configuración a los contenedores, como ficheros de configuración de aplicaciones.
 
 Ejemplo:
 
@@ -138,7 +138,7 @@ environment:
 
 #### **`env_file`**
 
-Especifica archivos que contienen variables de entorno que se deben cargar en el contenedor.
+Especifica ficheros que contienen variables de entorno que se deben cargar en el contenedor.
 
 Ejemplo:
 
@@ -269,7 +269,7 @@ mem_limit: 500m
 
 #### **`ulimits`**
 
-Define límites del sistema para un contenedor (por ejemplo, el número de archivos que puede abrir).
+Define límites del sistema para un contenedor (por ejemplo, el número de ficheros que puede abrir).
 
 Ejemplo:
 
@@ -424,7 +424,7 @@ networks:
 
 #### **`volumes`**
 
-Define los volúmenes de Docker, que se usan para persistir datos entre contenedores o entre contenedores y el sistema de archivos del host.
+Define los volúmenes de Docker, que se usan para persistir datos entre contenedores o entre contenedores y el sistema de ficheros del host.
 
 Ejemplo:
 
@@ -436,7 +436,7 @@ volumes:
 
 #### **`configs`**
 
-Define configuraciones que se pueden inyectar en los contenedores. Se usan para pasar datos de configuración a los contenedores, como archivos de configuración de aplicaciones.
+Define configuraciones que se pueden inyectar en los contenedores. Se usan para pasar datos de configuración a los contenedores, como ficheros de configuración de aplicaciones.
 
 Ejemplo:
 
@@ -514,7 +514,7 @@ environment:
 
 #### **`env_file`**
 
-Especifica archivos que contienen variables de entorno que se deben cargar en el contenedor.
+Especifica ficheros que contienen variables de entorno que se deben cargar en el contenedor.
 
 Ejemplo:
 
@@ -645,7 +645,7 @@ mem_limit: 500m
 
 #### **`ulimits`**
 
-Define límites del sistema para un contenedor (por ejemplo, el número de archivos que puede abrir).
+Define límites del sistema para un contenedor (por ejemplo, el número de ficheros que puede abrir).
 
 Ejemplo:
 
@@ -814,7 +814,7 @@ platform: linux/amd64
 
 #### **`tmpfs`**
 
-Montaje temporal en el contenedor. Esto crea un sistema de archivos temporal (en memoria) dentro del contenedor.
+Montaje temporal en el contenedor. Esto crea un sistema de ficheros temporal (en memoria) dentro del contenedor.
 
 Ejemplo:
 

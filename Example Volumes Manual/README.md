@@ -15,7 +15,7 @@
 ## **¿Qué son los volúmenes en Docker?**
 
 > [!NOTE]
-> *Los volúmenes son una forma de persistir datos en contenedores Docker. A diferencia de los sistemas de archivos temporales que desaparecen al detener o eliminar un contenedor, los volúmenes permiten que los datos permanezcan disponibles independientemente del ciclo de vida del contenedor.*
+> *Los volúmenes son una forma de persistir datos en contenedores Docker. A diferencia de los sistemas de ficheros temporales que desaparecen al detener o eliminar un contenedor, los volúmenes permiten que los datos permanezcan disponibles independientemente del ciclo de vida del contenedor.*
 
 ---
 
@@ -128,7 +128,7 @@ Options:
 docker volume inspect my-volume
 ```
 
-- *Proporciona detalles sobre el volumen, como la ubicación en el sistema de archivos (`Mountpoint`), el driver utilizado, y más.*
+- *Proporciona detalles sobre el volumen, como la ubicación en el sistema de ficheros (`Mountpoint`), el driver utilizado, y más.*
 
 ```bash
 docker volume inspect my-volume
@@ -162,7 +162,7 @@ docker volume rm my-volume
 
 ### **Ubicación física de los volúmenes**
 
-- *En el sistema de archivos del host, los datos de un volumen se almacenan en:*
+- *En el sistema de ficheros del host, los datos de un volumen se almacenan en:*
 
 ```bash
 /var/lib/docker/volumes/<volume-name>/_data
@@ -196,7 +196,7 @@ docker run -itu root:root -w /App -v my-volume:/App --name container-one ubuntu:
 
 #### **Paso 1: Crear y modificar datos en un contenedor**
 
-- **Dentro de `container-one`, crea una estructura de carpetas y archivos:**
+- **Dentro de `container-one`, crea una estructura de carpetas y ficheros:**
 
 ```bash
 mkdir -p ./python3 ./javascript ./php
@@ -311,7 +311,7 @@ local     custom-volume
 
 - **--driver local:** *Especifica que el driver será el predeterminado local.*
 - **--label environment=development:** *Asigna una etiqueta de metadatos para identificar el volumen.*
-- **--opt type=tmpfs:** *Especifica que se usará un sistema de archivos temporal (tmpfs).*
+- **--opt type=tmpfs:** *Especifica que se usará un sistema de ficheros temporal (tmpfs).*
 - **--opt device=tmpfs:** *Monta el dispositivo como un almacenamiento temporal.*
 - **--opt o=size=100m:** *Limita el tamaño del almacenamiento temporal a 100 MB.*
 - **custom-volume:** *Nombre del volumen creado.*
@@ -413,11 +413,11 @@ docker volume inspect custom-volume
    head: error writing 'standard output': No space left on device
    ```
 
-   *El error indica que el sistema de archivos montado en `/App` no tiene espacio suficiente para almacenar el fichero.*
+   *El error indica que el sistema de ficheros montado en `/App` no tiene espacio suficiente para almacenar el fichero.*
 
 ---
 
-## **Verificar el uso del sistema de archivos**
+## **Verificar el uso del sistema de ficheros**
 
 ### **Comando:**
 
@@ -430,9 +430,9 @@ docker volume inspect custom-volume
 - **`--total`:** *Muestra un resumen al final con el total de todas las entradas.*
 - **`--human-readable`:** *Presenta los tamaños en un formato legible (MB, GB).*
 - **`--si`:** *Usa múltiplos de 1000 en lugar de 1024.*
-- **`--sync`:** *Sincroniza las estadísticas del sistema de archivos antes de mostrarlas.*
+- **`--sync`:** *Sincroniza las estadísticas del sistema de ficheros antes de mostrarlas.*
 - **`--portability`:** *Usa un formato portátil compatible con POSIX.*
-- **`--print-type`:** *Muestra el tipo del sistema de archivos.*
+- **`--print-type`:** *Muestra el tipo del sistema de ficheros.*
 
    **Salida:**
 
@@ -452,7 +452,7 @@ docker volume inspect custom-volume
    total          -        256G   28G  217G  12% -
    ```
 
-- **`tmpfs          tmpfs    105M  105M     0 100% /App`:** *El volumen `/App` es un sistema de archivos temporal (`tmpfs`) con 105 MB de tamaño total, que ya está lleno.*
+- **`tmpfs          tmpfs    105M  105M     0 100% /App`:** *El volumen `/App` es un sistema de ficheros temporal (`tmpfs`) con 105 MB de tamaño total, que ya está lleno.*
 
 ---
 
@@ -465,7 +465,7 @@ du File1Gb.txt -sh
 ### **Desglose:**
 
 1. **`du`:**
-   - *Comando utilizado para mostrar el uso del disco por archivos o directorios.*
+   - *Comando utilizado para mostrar el uso del disco por ficheros o directorios.*
 
 2. **`File1Gb.txt`:**
    - *Especifica el fichero cuyo tamaño se desea verificar.*
@@ -482,7 +482,7 @@ du File1Gb.txt -sh
 100M    File1Gb.txt
 ```
 
-- **`100M`:** *El fichero tiene un tamaño real de 100 MB en el sistema de archivos.*
+- **`100M`:** *El fichero tiene un tamaño real de 100 MB en el sistema de ficheros.*
 - *Esto indica que, aunque se intentó generar un fichero de 1 GiB, el sistema no pudo completarlo debido a la falta de espacio disponible en el volumen `/App`.*
 
 ---
@@ -494,17 +494,17 @@ rm File1Gb.txt
 ```
 
 1. **`rm`:**
-   - *Elimina archivos o directorios especificados.*
+   - *Elimina ficheros o directorios especificados.*
 
 2. **`File1Gb.txt`:**
    - *Fichero que se desea borrar.*
 
 ### **Resultado:**
 
-- *El fichero `File1Gb.txt` se elimina del sistema de archivos montado en `/App`.*
-- *Esto libera el espacio que ocupaba en el volumen `tmpfs` y permite crear nuevos archivos sin exceder los límites de espacio disponibles.*
+- *El fichero `File1Gb.txt` se elimina del sistema de ficheros montado en `/App`.*
+- *Esto libera el espacio que ocupaba en el volumen `tmpfs` y permite crear nuevos ficheros sin exceder los límites de espacio disponibles.*
 
-- **Nota:** *Este proceso es crucial para gestionar eficientemente el espacio limitado en sistemas de archivos temporales (`tmpfs`).*
+- **Nota:** *Este proceso es crucial para gestionar eficientemente el espacio limitado en sistemas de ficheros temporales (`tmpfs`).*
 
 ---
 
@@ -528,7 +528,7 @@ rm File1Gb.txt
    90M    File99Megabytes.txt
    ```
 
-   **Nuevo uso del sistema de archivos:**
+   **Nuevo uso del sistema de ficheros:**
 
    ```bash
    df --total --human-readable --si --sync --portability --print-type
@@ -559,7 +559,7 @@ rm File1Gb.txt
 
    **Resumen**
 
-*El volumen montado en `/App` utiliza un sistema de archivos `tmpfs` con un límite de espacio de 105 MB. Este límite es la razón por la que el fichero de 1 GiB no pudo crearse. Al borrar archivos o reducir el tamaño de los nuevos archivos generados, es posible utilizar eficientemente el espacio disponible dentro del volumen.*
+*El volumen montado en `/App` utiliza un sistema de ficheros `tmpfs` con un límite de espacio de 105 MB. Este límite es la razón por la que el fichero de 1 GiB no pudo crearse. Al borrar ficheros o reducir el tamaño de los nuevos ficheros generados, es posible utilizar eficientemente el espacio disponible dentro del volumen.*
 
 - **Borramos Fichero**
 
@@ -618,9 +618,9 @@ df --total --human-readable --si --sync --portability --print-type
 - **`--total`:** *Muestra un resumen con el total de todas las entradas de uso de disco.*
 - **`--human-readable`:** *Presenta los tamaños en un formato legible para humanos (ej., MB, GB).*
 - **`--si`:** *Usa múltiplos de 1000 en lugar de 1024.*
-- **`--sync`:** *Sincroniza las estadísticas del sistema de archivos antes de mostrarlas.*
+- **`--sync`:** *Sincroniza las estadísticas del sistema de ficheros antes de mostrarlas.*
 - **`--portability`:** *Muestra los resultados de manera compatible con POSIX.*
-- **`--print-type`:** *Muestra el tipo del sistema de archivos.*
+- **`--print-type`:** *Muestra el tipo del sistema de ficheros.*
 
 ```bash
 Filesystem     Type     Size  Used Avail Use% Mounted on
@@ -654,11 +654,11 @@ head: error writing 'standard output': No space left on device
 
 - **Error:**  
   *El error indica que no hay espacio suficiente en el volumen `/App` para escribir los 80 MB del fichero.*  
-  *Este error ocurre porque el sistema de archivos en `/App` (un `tmpfs` de 105 MB) está completamente lleno, lo que impide la creación de archivos adicionales.*
+  *Este error ocurre porque el sistema de ficheros en `/App` (un `tmpfs` de 105 MB) está completamente lleno, lo que impide la creación de ficheros adicionales.*
 
 ---
 
-## **Verificar archivos en el directorio**
+## **Verificar ficheros en el directorio**
 
 ```bash
 ls
@@ -668,7 +668,7 @@ ls
 File100Megabytes.txt  File80Megabytes.txt
 ```
 
-- *Aparecen los dos archivos: `File100Megabytes.txt` (el fichero de 100 MB creado exitosamente) y `File80Megabytes.txt` (que no se pudo crear debido a la falta de espacio).*
+- *Aparecen los dos ficheros: `File100Megabytes.txt` (el fichero de 100 MB creado exitosamente) y `File80Megabytes.txt` (que no se pudo crear debido a la falta de espacio).*
 
 ---
 
@@ -687,7 +687,7 @@ du -sh File80Megabytes.txt
 
 - **Resumen**
 
-- *El volumen `/App` tiene un tamaño limitado a 105 MB (como un `tmpfs`), y ya está completamente lleno. Esto impide la creación de archivos adicionales que excedan el espacio disponible.*
+- *El volumen `/App` tiene un tamaño limitado a 105 MB (como un `tmpfs`), y ya está completamente lleno. Esto impide la creación de ficheros adicionales que excedan el espacio disponible.*
 - *El fichero de 100 MB se creó con éxito, pero cuando se intentó crear uno de 80 MB, el sistema arrojó un error de "No space left on device".*
 - *La verificación del tamaño del fichero `File80Megabytes.txt` mostró que no se había creado ningún fichero debido al error anterior.*
 
@@ -709,8 +709,8 @@ for i in $(seq 0 1 100); do mkdir -p $i; done
 
 ### **Comportamiento observado:**
 
-- *Aunque el espacio en `/App` está completamente lleno, podemos crear directorios sin que el sistema devuelva un error. Esto se debe a que la creación de directorios no consume espacio en disco de la misma manera que los archivos (que requieren almacenamiento físico de datos).*
-- *Cada directorio creado tiene un tamaño mínimo en el sistema de archivos, pero en este caso, es solo una estructura de metadatos (el espacio usado por cada directorio es muy pequeño).*
+- *Aunque el espacio en `/App` está completamente lleno, podemos crear directorios sin que el sistema devuelva un error. Esto se debe a que la creación de directorios no consume espacio en disco de la misma manera que los ficheros (que requieren almacenamiento físico de datos).*
+- *Cada directorio creado tiene un tamaño mínimo en el sistema de ficheros, pero en este caso, es solo una estructura de metadatos (el espacio usado por cada directorio es muy pequeño).*
 
 ```bash
 ls -lAh
@@ -829,7 +829,7 @@ for i in $(seq 0 1 100); do rmdir $i; done
 ```
 
 - **`rmdir $i`:**  
-  - *El comando `rmdir` elimina un directorio vacío. Este comando solo tiene efecto si el directorio está vacío; si contiene archivos o subdirectorios, el comando falla.*
+  - *El comando `rmdir` elimina un directorio vacío. Este comando solo tiene efecto si el directorio está vacío; si contiene ficheros o subdirectorios, el comando falla.*
 
 - *Los directorios creados anteriormente (del `0` al `100`) se eliminan correctamente con el comando `rmdir`, ya que están vacíos.*
 
@@ -845,7 +845,7 @@ docker volume inspect --format "{{.Mountpoint}}" custom-volume
   - *Este comando se usa para inspeccionar un volumen Docker específico (`custom-volume`) y extraer la información del punto de montaje del volumen.*
   - **`--format "{{.Mountpoint}}"`:** *Indica que solo se debe devolver la ubicación del punto de montaje del volumen, lo cual es útil para luego operar con este directorio.*
 
-### **Comando adicional para listar archivos:**
+### **Comando adicional para listar ficheros:**
 
 ```bash
 docker volume inspect -f"{{.Mountpoint}}" custom-volume | xargs sudo lsd -lA
@@ -856,14 +856,14 @@ docker volume inspect -f"{{.Mountpoint}}" custom-volume | xargs sudo lsd -lA
   - *En este caso, `xargs` recibe la ruta del punto de montaje del volumen y la pasa como argumento a `sudo lsd -lA`.*
 
 - **`sudo lsd -lA`:**  
-  - *`lsd` es un comando similar a `ls` pero con una interfaz más avanzada y colores, que se usa para listar los archivos y directorios.*
-  - *`-l` muestra los detalles de los archivos (como permisos, propietario, tamaño y fecha).*
-  - *`-A` muestra todos los archivos, incluyendo los ocultos, excepto `.` y `..`.*
+  - *`lsd` es un comando similar a `ls` pero con una interfaz más avanzada y colores, que se usa para listar los ficheros y directorios.*
+  - *`-l` muestra los detalles de los ficheros (como permisos, propietario, tamaño y fecha).*
+  - *`-A` muestra todos los ficheros, incluyendo los ocultos, excepto `.` y `..`.*
 
 ### **¿Por qué usamos `xargs`?**
 
 - **Uso de `xargs`:**  
-  *- El comando `docker volume inspect` devuelve el punto de montaje como una cadena, pero `lsd -lA` requiere que se le pase esta cadena como un argumento para indicar en qué directorio listar los archivos.*
+  *- El comando `docker volume inspect` devuelve el punto de montaje como una cadena, pero `lsd -lA` requiere que se le pase esta cadena como un argumento para indicar en qué directorio listar los ficheros.*
   - **`xargs`** *es necesario para transformar esta salida de una línea en un argumento para el siguiente comando.*
 
 ### **¿Qué pasa si no usamos `xargs`?**
@@ -987,7 +987,7 @@ docker volume inspect -f"{{.Mountpoint}}" custom-volume | xargs sudo lsd -lA
    ```
 
    - **`cd`:**  
-     - *Este comando cambia el directorio de trabajo a la ruta del volumen que contiene los archivos. Al ejecutar esto, nos situamos en el directorio de datos donde están los archivos que hemos creado previamente.*
+     - *Este comando cambia el directorio de trabajo a la ruta del volumen que contiene los ficheros. Al ejecutar esto, nos situamos en el directorio de datos donde están los ficheros que hemos creado previamente.*
 
    - **Listamos**
 
@@ -1001,7 +1001,7 @@ docker volume inspect -f"{{.Mountpoint}}" custom-volume | xargs sudo lsd -lA
 
 ---
 
-### **Problema con la creación de archivos**
+### **Problema con la creación de ficheros**
 
 - **Comando:**
 
@@ -1016,7 +1016,7 @@ docker volume inspect -f"{{.Mountpoint}}" custom-volume | xargs sudo lsd -lA
   - **`head -c 1G /dev/urandom`:**  
     - *Este comando lee 1 GB de datos aleatorios de `/dev/urandom` (una fuente de datos aleatorios generada por el sistema) y los escribe en el fichero `File1Gigabyte.txt`.*
   - **Error recibido:**  
-    - *El error "No queda espacio en el dispositivo" ocurre porque el sistema de archivos de `docker` que está montado en `/var/lib/docker/volumes/custom-volume/_data` tiene un espacio limitado y ya está completamente lleno (100% de uso).*
+    - *El error "No queda espacio en el dispositivo" ocurre porque el sistema de ficheros de `docker` que está montado en `/var/lib/docker/volumes/custom-volume/_data` tiene un espacio limitado y ya está completamente lleno (100% de uso).*
 
 ---
 
@@ -1029,14 +1029,14 @@ docker volume inspect -f"{{.Mountpoint}}" custom-volume | xargs sudo lsd -lA
    ```
 
   - **`df`:**  
-    - *Muestra el uso del espacio en disco de los sistemas de archivos montados en el sistema.*
+    - *Muestra el uso del espacio en disco de los sistemas de ficheros montados en el sistema.*
   - **Opciones utilizadas:**
     - `--total`: *Muestra el total al final del informe.*
     - `--human-readable`: *Muestra las unidades de tamaño en formato legible para el humano (por ejemplo, GB, MB).*
     - `--si`: *Usa potencias de 1000 (como 1K = 1000 bytes en lugar de 1024 bytes).*
-    - `--sync`: *Realiza un sincronizado previo del sistema de archivos antes de mostrar el uso.*
+    - `--sync`: *Realiza un sincronizado previo del sistema de ficheros antes de mostrar el uso.*
     - `--portability`: *Asegura que la salida sea compatible entre diferentes sistemas.*
-    - `--print-type`: *Muestra el tipo de cada sistema de archivos.*
+    - `--print-type`: *Muestra el tipo de cada sistema de ficheros.*
 
    **Resultado de `df`:**
 
@@ -1061,20 +1061,20 @@ docker volume inspect -f"{{.Mountpoint}}" custom-volume | xargs sudo lsd -lA
    ```
 
   - **`tmpfs`:**  
-    - *`tmpfs` es un sistema de archivos temporal que se monta en memoria. Es volátil, lo que significa que su contenido se pierde al reiniciar.*
-    - *En este caso, `tmpfs` se usa como un sistema de archivos temporal montado en `/var/lib/docker/volumes/custom-volume/_data`. Aunque se está usando 105 MB del espacio, este espacio es volátil y se pierde si se reinicia el contenedor o el host. El `100%` indica que todo el espacio de `tmpfs` está ocupado y no se puede escribir más datos.*
+    - *`tmpfs` es un sistema de ficheros temporal que se monta en memoria. Es volátil, lo que significa que su contenido se pierde al reiniciar.*
+    - *En este caso, `tmpfs` se usa como un sistema de ficheros temporal montado en `/var/lib/docker/volumes/custom-volume/_data`. Aunque se está usando 105 MB del espacio, este espacio es volátil y se pierde si se reinicia el contenedor o el host. El `100%` indica que todo el espacio de `tmpfs` está ocupado y no se puede escribir más datos.*
 
 ---
 
 ### **Explicación técnica sobre el uso de `tmpfs` por Docker**
 
 - **Docker y `tmpfs`:**
-  - *Cuando Docker monta un volumen, puede usar diferentes tipos de sistemas de archivos, y uno de ellos es `tmpfs`. El uso de `tmpfs` es común cuando el volumen necesita ser utilizado como un espacio en memoria para datos temporales y de corta duración.*
+  - *Cuando Docker monta un volumen, puede usar diferentes tipos de sistemas de ficheros, y uno de ellos es `tmpfs`. El uso de `tmpfs` es común cuando el volumen necesita ser utilizado como un espacio en memoria para datos temporales y de corta duración.*
   - *En este caso, **`tmpfs`** se monta en el directorio **`/var/lib/docker/volumes/custom-volume/_data`** y tiene un tamaño de **105 MB**.*
   - ***`tmpfs` se llena rápidamente** porque se usa como almacenamiento en memoria y es volátil. Si se intentan agregar más datos una vez que está lleno, se obtiene el error de "No queda espacio en el dispositivo". Esto explica por qué no se puede crear el fichero de 1 GB, ya que el espacio ya está lleno y no se puede usar más memoria temporal.*
   
 - **La naturaleza volátil de `tmpfs`:**
-  - *Los sistemas de archivos de tipo `tmpfs` no almacenan datos de manera persistente. El contenido de este tipo de sistema de archivos se pierde al reiniciar el contenedor o el sistema, lo que lo hace adecuado solo para almacenamiento temporal o cachés, pero no para datos persistentes.*
+  - *Los sistemas de ficheros de tipo `tmpfs` no almacenan datos de manera persistente. El contenido de este tipo de sistema de ficheros se pierde al reiniciar el contenedor o el sistema, lo que lo hace adecuado solo para almacenamiento temporal o cachés, pero no para datos persistentes.*
 
 ---
 
@@ -1109,9 +1109,9 @@ docker volume inspect -f"{{.Mountpoint}}" custom-volume | xargs sudo lsd -lA
    ```
 
    - **`ls -lAh`:**  
-     - *Muestra los archivos y directorios en el directorio actual con detalles, como permisos, propietario, tamaño, etc.*
+     - *Muestra los ficheros y directorios en el directorio actual con detalles, como permisos, propietario, tamaño, etc.*
    - **Resultado:**
-     *Se observa la lista de directorios creados y algunos archivos adicionales.*
+     *Se observa la lista de directorios creados y algunos ficheros adicionales.*
 
    ```bash
    ls -lAh
@@ -1230,7 +1230,7 @@ docker volume inspect -f"{{.Mountpoint}}" custom-volume | xargs sudo lsd -lA
    ```
 
   - **`rmdir $i`:**  
-    - *Elimina los directorios vacíos creados anteriormente. Si algún directorio contiene archivos o subdirectorios, no será eliminado y generará un error.*
+    - *Elimina los directorios vacíos creados anteriormente. Si algún directorio contiene ficheros o subdirectorios, no será eliminado y generará un error.*
 
 ---
 
@@ -1395,11 +1395,11 @@ docker run --stop-signal SIGINT --stop-timeout 20 my-container
    docker restart -sSIGTERM -t10 container-volume-example
    ```
 
-7. **Comprobamos que los datos se borraron** *en el panel, como se observa con la eliminación de los archivos generados.*
+7. **Comprobamos que los datos se borraron** *en el panel, como se observa con la eliminación de los ficheros generados.*
 
 - **Resumen:**
 - *Al reiniciar el contenedor, el volumen se borra si es de tipo `tmpfs` o está configurado como un volumen temporal.*
-- *Los archivos que se habían generado previamente ya no están presentes tras el reinicio del contenedor, indicando que los datos en el volumen se han perdido.*
+- *Los ficheros que se habían generado previamente ya no están presentes tras el reinicio del contenedor, indicando que los datos en el volumen se han perdido.*
 
 *Este comportamiento es esperado para volúmenes temporales (como los de tipo `tmpfs`).*
 
