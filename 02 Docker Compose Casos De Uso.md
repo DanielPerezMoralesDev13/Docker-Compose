@@ -8,7 +8,7 @@
 
 *En desarrollo, muchos proyectos requieren múltiples servicios que deben ejecutarse juntos, como bases de datos, servidores web, servicios de caché, entre otros.*
 
-- **Caso de uso:** *Supongamos que estás desarrollando una aplicación web que usa un servidor de base de datos MongoDB y un servidor web Nginx. En lugar de ejecutar manualmente cada contenedor de Docker, puedes usar Docker Compose para configurar y gestionar todos los servicios de la aplicación desde un solo archivo `docker-compose.yml`.*
+- **Caso de uso:** *Supongamos que estás desarrollando una aplicación web que usa un servidor de base de datos MongoDB y un servidor web Nginx. En lugar de ejecutar manualmente cada contenedor de Docker, puedes usar Docker Compose para configurar y gestionar todos los servicios de la aplicación desde un solo fichero `docker-compose.yml`.*
   
   **Ejemplo:**
 
@@ -143,7 +143,7 @@
 
 *En el desarrollo, se puede crear una configuración que simule cómo se ejecutará la aplicación en producción, incluyendo balanceadores de carga, bases de datos, cachés, etc.*
 
-- **Caso de uso:** *Si estás desarrollando una aplicación web, puedes configurar un entorno en Docker Compose que incluya un balanceador de carga Nginx, una base de datos, y un servidor web, todo en el mismo archivo de configuración. Esto te permite emular cómo se desplegará la aplicación en un entorno real.*
+- **Caso de uso:** *Si estás desarrollando una aplicación web, puedes configurar un entorno en Docker Compose que incluya un balanceador de carga Nginx, una base de datos, y un servidor web, todo en el mismo fichero de configuración. Esto te permite emular cómo se desplegará la aplicación en un entorno real.*
 
   **Ejemplo:**
 
@@ -172,7 +172,7 @@
 
 *Puedes utilizar Docker Compose para garantizar que todos los desarrolladores en tu equipo trabajen en el mismo entorno, utilizando las mismas versiones de las imágenes de Docker y configuraciones de servicios.*
 
-- **Caso de uso:** *Si tu equipo de desarrollo necesita usar una versión específica de Node.js o Python, puedes especificar la imagen exacta que debe ser utilizada en el archivo `docker-compose.yml`. Esto elimina la incertidumbre sobre qué versión se está ejecutando y facilita el trabajo colaborativo.*
+- **Caso de uso:** *Si tu equipo de desarrollo necesita usar una versión específica de Node.js o Python, puedes especificar la imagen exacta que debe ser utilizada en el fichero `docker-compose.yml`. Esto elimina la incertidumbre sobre qué versión se está ejecutando y facilita el trabajo colaborativo.*
 
   **Ejemplo:**
 

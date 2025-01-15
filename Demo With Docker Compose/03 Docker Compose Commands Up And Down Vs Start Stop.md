@@ -65,12 +65,12 @@ docker compose -f mongo-services.yaml up -d -t
 docker compose -f mongo-services.yaml up -dt
 ```
 
-*El comando `docker compose up` se utiliza para iniciar y gestionar un conjunto de servicios definidos en un archivo de configuración `docker-compose.yml` o especificado mediante la opción `-f` con un archivo alternativo (como en el ejemplo, `mongo-services.yaml`).*
+*El comando `docker compose up` se utiliza para iniciar y gestionar un conjunto de servicios definidos en un fichero de configuración `docker-compose.yml` o especificado mediante la opción `-f` con un fichero alternativo (como en el ejemplo, `mongo-services.yaml`).*
 
 ## **Detalles del comando:**
 
 1. **`up`:**  
-   - *Construye las imágenes (si no están construidas) y las levanta como contenedores según la configuración del archivo especificado.*
+   - *Construye las imágenes (si no están construidas) y las levanta como contenedores según la configuración del fichero especificado.*
    - *También verifica dependencias entre servicios y las ejecuta en el orden adecuado.*
 
 2. **Opción `-d` o `--detach`:**  
@@ -86,7 +86,7 @@ docker compose -f mongo-services.yaml up -dt
    ```
 
    **Este comando:**
-   - *Usa el archivo `mongo-services.yaml` para definir los servicios.*
+   - *Usa el fichero `mongo-services.yaml` para definir los servicios.*
    - *Levanta los servicios en segundo plano (`--detach`).*
    - *Genera los logs con marcas de tiempo (`--timestamps`).*
 
@@ -94,7 +94,7 @@ docker compose -f mongo-services.yaml up -dt
 
 - **La salida del ejemplo muestra que Docker está:**
 - **Descargando las imágenes** *requeridas de Docker Hub o de un registro configurado.*
-- **Creando y levantando los contenedores** *en base a las configuraciones del archivo.*
+- **Creando y levantando los contenedores** *en base a las configuraciones del fichero.*
 - *Cada paso indica si una capa fue descargada o reutilizada, junto con el tiempo tomado.*
 
 - **Aplicación del comando:**
@@ -155,16 +155,16 @@ Options:
 
 #### **Descripción general**
 
-- *Detiene y elimina los contenedores, redes, volúmenes y otras configuraciones asociadas a los servicios definidos en el archivo `mongo-services.yaml`.*
+- *Detiene y elimina los contenedores, redes, volúmenes y otras configuraciones asociadas a los servicios definidos en el fichero `mongo-services.yaml`.*
 
 #### **Opciones explicadas**
 
 - **`-f mongo-services.yaml`:**
-  *Especifica el archivo de configuración a usar (en este caso, `mongo-services.yaml`).*
+  *Especifica el fichero de configuración a usar (en este caso, `mongo-services.yaml`).*
   
 - **`down`:**
   **Detiene y elimina:**
-  - *Contenedores definidos en el archivo.*
+  - *Contenedores definidos en el fichero.*
   - *Redes creadas automáticamente para conectar estos servicios.*
   - *Otros recursos configurados.*
 
@@ -177,7 +177,7 @@ Options:
   - *Sin esta opción, los datos persisten en los volúmenes aunque los contenedores se eliminen.*
 
 - **`--remove-orphans`:**
-  *Elimina contenedores que no están definidos en el archivo actual pero comparten la red.*
+  *Elimina contenedores que no están definidos en el fichero actual pero comparten la red.*
 
 - **`--rmi local`:**
   *Borra las imágenes locales creadas por `docker compose`.*
@@ -340,7 +340,7 @@ docker compose -f mongo-services.yaml down --timeout 10 --volumes --remove-orpha
 docker compose -f mongo-services.yaml up --detach --timestamps
 ```
 
-- **`up`:** *Crea y/o inicia los servicios definidos en el archivo.*
+- **`up`:** *Crea y/o inicia los servicios definidos en el fichero.*
 - **`--detach`:** *Corre los contenedores en segundo plano.*
 - **`--timestamps`:** *Incluye marcas de tiempo en los logs.*
 - **Salida:** *Los servicios están configurados para usar una red (`Network`) y se levantan de forma correcta.*
@@ -496,7 +496,7 @@ Options:
 
 ### **Explicación del comando `docker compose logs`**
 
-*El comando `docker compose logs` se utiliza para visualizar los logs generados por los servicios definidos en un archivo de configuración (`docker-compose.yml` o especificado mediante `-f`).*
+*El comando `docker compose logs` se utiliza para visualizar los logs generados por los servicios definidos en un fichero de configuración (`docker-compose.yml` o especificado mediante `-f`).*
 
 - **`--tail <n>`:**
   - *Muestra las últimas `n` líneas de logs por servicio.*

@@ -15,8 +15,8 @@
 - *[docker-config-json](https://man.archlinux.org/man/docker-config-json.5.en "https://man.archlinux.org/man/docker-config-json.5.en")*
 - **1. .dockercfg (Formato antiguo)**
 
-- **Introducción:** *`.dockercfg` era el archivo de configuración predeterminado en versiones más antiguas de Docker (antes de la versión 1.7.0, lanzada en abril de 2015).*
-- **Ubicación:** *Este archivo residía en el directorio `~/.docker/` o directamente en el directorio del usuario como un archivo oculto.*
+- **Introducción:** *`.dockercfg` era el fichero de configuración predeterminado en versiones más antiguas de Docker (antes de la versión 1.7.0, lanzada en abril de 2015).*
+- **Ubicación:** *Este fichero residía en el directorio `~/.docker/` o directamente en el directorio del usuario como un fichero oculto.*
 - **Propósito:**
   - *Almacenaba credenciales de inicio de sesión (`docker login`) para registries de Docker en formato JSON plano.*
   - *Ejemplo:*
@@ -30,14 +30,14 @@
     }
     ```
 
-- **Seguridad:** *Las credenciales estaban codificadas en Base64, pero no cifradas, lo que hacía que este formato fuera vulnerable si alguien obtenía acceso al archivo.*
+- **Seguridad:** *Las credenciales estaban codificadas en Base64, pero no cifradas, lo que hacía que este formato fuera vulnerable si alguien obtenía acceso al fichero.*
 
 - **2. .docker/config.json (Formato actual)**
 
 - **Introducción:** *`config.json` reemplazó a `.dockercfg` a partir de Docker 1.7.0 como parte de una migración para soportar más funcionalidades y mejorar la seguridad.*
 - **Ubicación:** *Por defecto, se encuentra en `~/.docker/config.json`.*
 - **Propósito:**
-  - *Es el archivo de configuración principal para la CLI de Docker.*
+  - *Es el fichero de configuración principal para la CLI de Docker.*
   - *Almacena no solo credenciales, sino también configuraciones avanzadas como:*
     - *Configuración de proxy.*
     - *Configuración de registro de imágenes.*
@@ -69,14 +69,14 @@
 
 - **Seguridad:**
   - *Ahora, las credenciales pueden almacenarse en un **credencial store** o un **helper nativo** de la plataforma (como Keychain en macOS, Credencial Manager en Windows o pass en Linux).*
-  - *Esto elimina las credenciales codificadas en Base64 del archivo, mejorando significativamente la seguridad.*
+  - *Esto elimina las credenciales codificadas en Base64 del fichero, mejorando significativamente la seguridad.*
 
 - **Migración entre formatos**
 
 - **Cuando Docker 1.7.0 se lanzó, se introdujo un proceso de migración:**
 
 - *El contenido de `.dockercfg` se movió automáticamente a `~/.docker/config.json`.*
-- *El archivo `.dockercfg` no se elimina automáticamente, pero ya no es utilizado por Docker.*
+- *El fichero `.dockercfg` no se elimina automáticamente, pero ya no es utilizado por Docker.*
 
 - **Relación con /etc/docker/daemon.json**
 

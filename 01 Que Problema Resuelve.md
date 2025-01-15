@@ -10,7 +10,7 @@
 
 **Problema:** *Ejecutar múltiples contenedores manualmente y coordinar sus interacciones puede ser complejo y difícil de manejar.*
 
-**Solución de Docker Compose:** *Define todos los servicios, redes y volúmenes en un único archivo YAML (`docker-compose.yml`), lo que simplifica la configuración y el lanzamiento de todos los contenedores con un solo comando (`docker compose up`).*
+**Solución de Docker Compose:** *Define todos los servicios, redes y volúmenes en un único fichero YAML (`docker-compose.yml`), lo que simplifica la configuración y el lanzamiento de todos los contenedores con un solo comando (`docker compose up`).*
 
 ### **Configuración Reutilizable**
 
@@ -18,7 +18,7 @@
 
 **Problema:** *La configuración de contenedores es repetitiva y propensa a errores al tener que escribirla cada vez.*
 
-**Solución de Docker Compose:** *Puedes definir la configuración una vez en el archivo `docker-compose.yml`, lo que permite fácilmente reutilizar la misma configuración en diferentes entornos (desarrollo, producción, pruebas, etc.).*
+**Solución de Docker Compose:** *Puedes definir la configuración una vez en el fichero `docker-compose.yml`, lo que permite fácilmente reutilizar la misma configuración en diferentes entornos (desarrollo, producción, pruebas, etc.).*
 
 ### **Dependencias Entre Servicios**
 
@@ -34,7 +34,7 @@
 
 **Problema:** *La configuración manual de redes y volúmenes en Docker puede ser tediosa y llevar a errores, especialmente cuando se requiere la conexión entre varios contenedores.*
 
-**Solución de Docker Compose:** *La creación de redes y volúmenes es automática o configurable en el archivo YAML, y Docker Compose se encarga de crear la infraestructura necesaria para la comunicación entre contenedores y la persistencia de datos.*
+**Solución de Docker Compose:** *La creación de redes y volúmenes es automática o configurable en el fichero YAML, y Docker Compose se encarga de crear la infraestructura necesaria para la comunicación entre contenedores y la persistencia de datos.*
 
 ### **Escalabilidad y Despliegue**
 

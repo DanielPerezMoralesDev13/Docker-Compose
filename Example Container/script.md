@@ -6,9 +6,9 @@
 
 ## **`#!`** (Shebang)
 
-- *El `#!` al inicio de un archivo indica que el archivo debe ejecutarse con un intérprete específico. Este es el **shebang** y permite que el sistema operativo sepa qué programa debe usar para ejecutar el script.*
+- *El `#!` al inicio de un fichero indica que el fichero debe ejecutarse con un intérprete específico. Este es el **shebang** y permite que el sistema operativo sepa qué programa debe usar para ejecutar el script.*
 
-- *El `#!` no es un comando por sí mismo, sino una convención que indica al sistema qué programa usar para interpretar el archivo.*
+- *El `#!` no es un comando por sí mismo, sino una convención que indica al sistema qué programa usar para interpretar el fichero.*
 
 ### **`/usr/bin/env`**
 

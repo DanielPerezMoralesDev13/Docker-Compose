@@ -268,7 +268,7 @@ rm ./main.lua
 ls -lA
 ```
 
-- **El archivo `main.lua` ya no estará presente.**
+- **El fichero `main.lua` ya no estará presente.**
 
 ---
 
@@ -393,7 +393,7 @@ docker volume inspect custom-volume
 
 ### **Espacio disponible en el volumen `/App`:**
 
-   **Para probar el límite de espacio, se intenta crear un archivo grande:**
+   **Para probar el límite de espacio, se intenta crear un fichero grande:**
 
    ```bash
    head -c 1G /dev/urandom > File1Gb.txt
@@ -401,11 +401,11 @@ docker volume inspect custom-volume
 
    **Explicación:**
 
-- **`head`:** *Muestra las primeras líneas o bytes de un archivo o flujo de datos.*
+- **`head`:** *Muestra las primeras líneas o bytes de un fichero o flujo de datos.*
 - **`-c 1G`:** *Genera 1 GiB de datos aleatorios.*
 - **`/dev/urandom`:** *Es un generador de números aleatorios proporcionado por el sistema operativo.*
-- **`>`:** *Redirige la salida a un archivo.*
-- **`File1Gb.txt`:** *Archivo que contendrá los datos generados.*
+- **`>`:** *Redirige la salida a un fichero.*
+- **`File1Gb.txt`:** *Fichero que contendrá los datos generados.*
 
    **Error:**
 
@@ -413,7 +413,7 @@ docker volume inspect custom-volume
    head: error writing 'standard output': No space left on device
    ```
 
-   *El error indica que el sistema de archivos montado en `/App` no tiene espacio suficiente para almacenar el archivo.*
+   *El error indica que el sistema de archivos montado en `/App` no tiene espacio suficiente para almacenar el fichero.*
 
 ---
 
@@ -456,7 +456,7 @@ docker volume inspect custom-volume
 
 ---
 
-## **Verificamos el peso del archivo**
+## **Verificamos el peso del fichero**
 
 ```bash
 du File1Gb.txt -sh
@@ -468,7 +468,7 @@ du File1Gb.txt -sh
    - *Comando utilizado para mostrar el uso del disco por archivos o directorios.*
 
 2. **`File1Gb.txt`:**
-   - *Especifica el archivo cuyo tamaño se desea verificar.*
+   - *Especifica el fichero cuyo tamaño se desea verificar.*
 
 3. **`-s`:**
    - *Muestra únicamente el tamaño total en lugar de detallar subdirectorios (si los hubiera).*
@@ -482,12 +482,12 @@ du File1Gb.txt -sh
 100M    File1Gb.txt
 ```
 
-- **`100M`:** *El archivo tiene un tamaño real de 100 MB en el sistema de archivos.*
-- *Esto indica que, aunque se intentó generar un archivo de 1 GiB, el sistema no pudo completarlo debido a la falta de espacio disponible en el volumen `/App`.*
+- **`100M`:** *El fichero tiene un tamaño real de 100 MB en el sistema de archivos.*
+- *Esto indica que, aunque se intentó generar un fichero de 1 GiB, el sistema no pudo completarlo debido a la falta de espacio disponible en el volumen `/App`.*
 
 ---
 
-## **Borramos el archivo**
+## **Borramos el fichero**
 
 ```bash
 rm File1Gb.txt
@@ -497,24 +497,24 @@ rm File1Gb.txt
    - *Elimina archivos o directorios especificados.*
 
 2. **`File1Gb.txt`:**
-   - *Archivo que se desea borrar.*
+   - *Fichero que se desea borrar.*
 
 ### **Resultado:**
 
-- *El archivo `File1Gb.txt` se elimina del sistema de archivos montado en `/App`.*
+- *El fichero `File1Gb.txt` se elimina del sistema de archivos montado en `/App`.*
 - *Esto libera el espacio que ocupaba en el volumen `tmpfs` y permite crear nuevos archivos sin exceder los límites de espacio disponibles.*
 
 - **Nota:** *Este proceso es crucial para gestionar eficientemente el espacio limitado en sistemas de archivos temporales (`tmpfs`).*
 
 ---
 
-## **Crear un archivo más pequeño:**
+## **Crear un fichero más pequeño:**
 
    ```bash
    head -c 90M /dev/urandom > File99Megabytes.txt
    ```
 
-- *Se genera un archivo de 90 MB sin problemas.*
+- *Se genera un fichero de 90 MB sin problemas.*
 
    **Verificar tamaño:**
 
@@ -559,7 +559,7 @@ rm File1Gb.txt
 
    **Resumen**
 
-*El volumen montado en `/App` utiliza un sistema de archivos `tmpfs` con un límite de espacio de 105 MB. Este límite es la razón por la que el archivo de 1 GiB no pudo crearse. Al borrar archivos o reducir el tamaño de los nuevos archivos generados, es posible utilizar eficientemente el espacio disponible dentro del volumen.*
+*El volumen montado en `/App` utiliza un sistema de archivos `tmpfs` con un límite de espacio de 105 MB. Este límite es la razón por la que el fichero de 1 GiB no pudo crearse. Al borrar archivos o reducir el tamaño de los nuevos archivos generados, es posible utilizar eficientemente el espacio disponible dentro del volumen.*
 
 - **Borramos Fichero**
 
@@ -569,7 +569,7 @@ rm File99Megabytes.txt
 
 ---
 
-## **Crear un archivo de 100 MB**
+## **Crear un fichero de 100 MB**
 
 ```bash
 head --bytes 100M /dev/urandom > File100Megabytes.txt
@@ -578,23 +578,23 @@ head --bytes 100M /dev/urandom > File100Megabytes.txt
 ### **Desglose del comando:**
 
 1. **`head`:**  
-   - *Comando que muestra las primeras líneas o bytes de un archivo o flujo de datos.*
+   - *Comando que muestra las primeras líneas o bytes de un fichero o flujo de datos.*
 
 2. **`--bytes 100M`:**  
    - *Especifica que se desean los primeros 100 MB de datos generados aleatoriamente.*
 
 3. **`/dev/urandom`:**  
-   - *Archivo especial que genera datos aleatorios, utilizado como fuente para la creación del archivo.*
+   - *Fichero especial que genera datos aleatorios, utilizado como fuente para la creación del fichero.*
 
 4. **`>`:**  
-   - *Redirige la salida de los datos aleatorios hacia un archivo en el sistema.*
+   - *Redirige la salida de los datos aleatorios hacia un fichero en el sistema.*
 
 5. **`File100Megabytes.txt`:**  
-   - *Archivo de salida que contendrá los 100 MB de datos aleatorios generados.*
+   - *Fichero de salida que contendrá los 100 MB de datos aleatorios generados.*
 
 ---
 
-### **Verificar el tamaño del archivo**
+### **Verificar el tamaño del fichero**
 
 ```bash
 du File100Megabytes.txt -sh
@@ -607,7 +607,7 @@ du File100Megabytes.txt -sh
 #### **Interpretación:**
 
 - **`100M`:**  
-  *El archivo tiene un tamaño de 100 MB, como se esperaba.*
+  *El fichero tiene un tamaño de 100 MB, como se esperaba.*
 
 ```bash
 df --total --human-readable --si --sync --portability --print-type
@@ -642,7 +642,7 @@ total          -        256G   28G  217G  12% -
 
 ---
 
-## **Intentar crear un archivo de 80 MB**
+## **Intentar crear un fichero de 80 MB**
 
 ```bash
 head --bytes 80M /dev/urandom > File80Megabytes.txt
@@ -653,7 +653,7 @@ head: error writing 'standard output': No space left on device
 ```
 
 - **Error:**  
-  *El error indica que no hay espacio suficiente en el volumen `/App` para escribir los 80 MB del archivo.*  
+  *El error indica que no hay espacio suficiente en el volumen `/App` para escribir los 80 MB del fichero.*  
   *Este error ocurre porque el sistema de archivos en `/App` (un `tmpfs` de 105 MB) está completamente lleno, lo que impide la creación de archivos adicionales.*
 
 ---
@@ -668,11 +668,11 @@ ls
 File100Megabytes.txt  File80Megabytes.txt
 ```
 
-- *Aparecen los dos archivos: `File100Megabytes.txt` (el archivo de 100 MB creado exitosamente) y `File80Megabytes.txt` (que no se pudo crear debido a la falta de espacio).*
+- *Aparecen los dos archivos: `File100Megabytes.txt` (el fichero de 100 MB creado exitosamente) y `File80Megabytes.txt` (que no se pudo crear debido a la falta de espacio).*
 
 ---
 
-## **Verificar tamaño del archivo de 80 MB**
+## **Verificar tamaño del fichero de 80 MB**
 
 ```bash
 du -sh File80Megabytes.txt
@@ -683,13 +683,13 @@ du -sh File80Megabytes.txt
 ```
 
 - **`0`:**  
-  *El archivo `File80Megabytes.txt` no tiene tamaño porque no pudo ser creado debido a la falta de espacio en el volumen montado en `/App`.*
+  *El fichero `File80Megabytes.txt` no tiene tamaño porque no pudo ser creado debido a la falta de espacio en el volumen montado en `/App`.*
 
 - **Resumen**
 
 - *El volumen `/App` tiene un tamaño limitado a 105 MB (como un `tmpfs`), y ya está completamente lleno. Esto impide la creación de archivos adicionales que excedan el espacio disponible.*
-- *El archivo de 100 MB se creó con éxito, pero cuando se intentó crear uno de 80 MB, el sistema arrojó un error de "No space left on device".*
-- *La verificación del tamaño del archivo `File80Megabytes.txt` mostró que no se había creado ningún archivo debido al error anterior.*
+- *El fichero de 100 MB se creó con éxito, pero cuando se intentó crear uno de 80 MB, el sistema arrojó un error de "No space left on device".*
+- *La verificación del tamaño del fichero `File80Megabytes.txt` mostró que no se había creado ningún fichero debido al error anterior.*
 
 ### **Creación de directorios sin error**
 
@@ -1014,7 +1014,7 @@ docker volume inspect -f"{{.Mountpoint}}" custom-volume | xargs sudo lsd -lA
    ```
 
   - **`head -c 1G /dev/urandom`:**  
-    - *Este comando lee 1 GB de datos aleatorios de `/dev/urandom` (una fuente de datos aleatorios generada por el sistema) y los escribe en el archivo `File1Gigabyte.txt`.*
+    - *Este comando lee 1 GB de datos aleatorios de `/dev/urandom` (una fuente de datos aleatorios generada por el sistema) y los escribe en el fichero `File1Gigabyte.txt`.*
   - **Error recibido:**  
     - *El error "No queda espacio en el dispositivo" ocurre porque el sistema de archivos de `docker` que está montado en `/var/lib/docker/volumes/custom-volume/_data` tiene un espacio limitado y ya está completamente lleno (100% de uso).*
 
@@ -1071,7 +1071,7 @@ docker volume inspect -f"{{.Mountpoint}}" custom-volume | xargs sudo lsd -lA
 - **Docker y `tmpfs`:**
   - *Cuando Docker monta un volumen, puede usar diferentes tipos de sistemas de archivos, y uno de ellos es `tmpfs`. El uso de `tmpfs` es común cuando el volumen necesita ser utilizado como un espacio en memoria para datos temporales y de corta duración.*
   - *En este caso, **`tmpfs`** se monta en el directorio **`/var/lib/docker/volumes/custom-volume/_data`** y tiene un tamaño de **105 MB**.*
-  - ***`tmpfs` se llena rápidamente** porque se usa como almacenamiento en memoria y es volátil. Si se intentan agregar más datos una vez que está lleno, se obtiene el error de "No queda espacio en el dispositivo". Esto explica por qué no se puede crear el archivo de 1 GB, ya que el espacio ya está lleno y no se puede usar más memoria temporal.*
+  - ***`tmpfs` se llena rápidamente** porque se usa como almacenamiento en memoria y es volátil. Si se intentan agregar más datos una vez que está lleno, se obtiene el error de "No queda espacio en el dispositivo". Esto explica por qué no se puede crear el fichero de 1 GB, ya que el espacio ya está lleno y no se puede usar más memoria temporal.*
   
 - **La naturaleza volátil de `tmpfs`:**
   - *Los sistemas de archivos de tipo `tmpfs` no almacenan datos de manera persistente. El contenido de este tipo de sistema de archivos se pierde al reiniciar el contenedor o el sistema, lo que lo hace adecuado solo para almacenamiento temporal o cachés, pero no para datos persistentes.*
@@ -1363,7 +1363,7 @@ docker run --stop-signal SIGINT --stop-timeout 20 my-container
    **Diferencia clave:**  
    - **`/dev/random`** *puede ser más seguro pero más lento, mientras que **`/dev/urandom`** es más rápido pero no garantiza la misma calidad de aleatoriedad en circunstancias de baja entropía.*
 
-5. **Ejecutamos el siguiente comando para generar un archivo aleatorio:**
+5. **Ejecutamos el siguiente comando para generar un fichero aleatorio:**
 
    ```bash
    head --bytes 100M /dev/random > File1Megabytes.txt

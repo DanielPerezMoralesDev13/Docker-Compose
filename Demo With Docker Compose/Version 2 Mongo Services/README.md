@@ -4,7 +4,7 @@
 
 # ***Mongo Service Version 2 Docker Compose***
 
-- *Si eliminas este atributo, el mensaje de advertencia desaparecerá y evitarás posibles confusiones relacionadas con su uso. Esto es porque Docker Compose ahora determina automáticamente cómo manejar el archivo sin necesidad de especificar una versión explícita.*
+- *Si eliminas este atributo, el mensaje de advertencia desaparecerá y evitarás posibles confusiones relacionadas con su uso. Esto es porque Docker Compose ahora determina automáticamente cómo manejar el fichero sin necesidad de especificar una versión explícita.*
 
 ## **Mensaje de advertencia**
 
@@ -22,10 +22,10 @@ WARN[0000] /home/d4nitrix13/Escritorio/Repository/Docker Compose/Demo With Docke
    - *Aunque no afecta el funcionamiento, genera advertencias en la terminal, lo cual puede llevar a confusión, especialmente en proyectos nuevos o colaborativos.*
 
 3. **Cómo resolverlo:**
-   - *Elimina la línea `version: "x.x"` de tu archivo `mongo-services.yaml`.*
+   - *Elimina la línea `version: "x.x"` de tu fichero `mongo-services.yaml`.*
 
 4. **Beneficio:**
-   - *El archivo de configuración queda más limpio y alineado con las prácticas actuales de Docker Compose.*
+   - *El fichero de configuración queda más limpio y alineado con las prácticas actuales de Docker Compose.*
    - *Elimina advertencias innecesarias, mejorando la claridad del flujo de trabajo.*
 
 ### **Ejemplo antes y después**

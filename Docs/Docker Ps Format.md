@@ -60,7 +60,7 @@ docker ps --format "Template"
 
 ### ***Personalización con configuraciones predeterminadas***
 
-- **Puedes definir una configuración predeterminada para el formato usando el archivo de configuración de Docker CLI (`~/.docker/config.json`):**
+- **Puedes definir una configuración predeterminada para el formato usando el fichero de configuración de Docker CLI (`~/.docker/config.json`):**
 
 ```json
 {

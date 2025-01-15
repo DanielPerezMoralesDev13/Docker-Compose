@@ -10,7 +10,7 @@
 *![Compose Micro Servicio](/Images/Docker%20Compose%20Micro%20Servicios.png "/Images/Docker%20Compose%20Micro%20Servicios.png")*
 *![Multi Container Docker](/Images/Multi%20Container%20Docker%20Aplicacion.png "/Images/Multi%20Container%20Docker%20Aplicacion.png")*
 
-- *Docker Compose es una herramienta de Docker que permite definir y ejecutar aplicaciones con múltiples contenedores usando un archivo YAML. Su función principal es simplificar la orquestación de contenedores, gestionando su ciclo de vida (creación, configuración, inicialización y destrucción) y las relaciones entre ellos.*
+- *Docker Compose es una herramienta de Docker que permite definir y ejecutar aplicaciones con múltiples contenedores usando un fichero YAML. Su función principal es simplificar la orquestación de contenedores, gestionando su ciclo de vida (creación, configuración, inicialización y destrucción) y las relaciones entre ellos.*
 
 > [!TIP]
 > **El comando `docker system prune --all --force --volumes` realiza una limpieza exhaustiva en Docker, eliminando varios elementos que no están en uso.**
@@ -37,7 +37,7 @@
 ## **Explicación técnica a bajo nivel**
 
 1. **Definición de servicios:**
-   - *En el archivo `docker-compose.yml`, defines los servicios, que son contenedores individuales con configuraciones específicas. Cada servicio está respaldado por una imagen de Docker y puede tener configuraciones como variables de entorno, volúmenes, redes, puertos expuestos, dependencias y límites de recursos.*
+   - *En el fichero `docker-compose.yml`, defines los servicios, que son contenedores individuales con configuraciones específicas. Cada servicio está respaldado por una imagen de Docker y puede tener configuraciones como variables de entorno, volúmenes, redes, puertos expuestos, dependencias y límites de recursos.*
 
 2. **Formato del YAML:**
    - *Docker Compose utiliza un formato YAML estructurado para definir:*
@@ -62,7 +62,7 @@
    - **Redes:** *Crea redes virtuales (generalmente en modo bridge) para permitir comunicación aislada entre contenedores de la misma aplicación.*
 
 6. **Ciclo de vida:**
-   - *Docker Compose invoca las APIs del Docker Engine para crear contenedores, asignarles redes, montar volúmenes y configurar las conexiones según el archivo YAML.*
+   - *Docker Compose invoca las APIs del Docker Engine para crear contenedores, asignarles redes, montar volúmenes y configurar las conexiones según el fichero YAML.*
 
 7. **Compatibilidad:**
    - *Docker Compose está diseñado para escenarios de desarrollo, pruebas y entornos de staging, pero no reemplaza a herramientas de orquestación como Kubernetes para entornos de producción.*
@@ -96,7 +96,7 @@
 7. **Herramientas comunes de orquestación:**
    - **Docker Compose:**
      - *Diseñado para orquestar servicios en una máquina local o para entornos de desarrollo.*
-     - *Se enfoca en coordinar múltiples contenedores definidos en un archivo `docker-compose.yml`.*
+     - *Se enfoca en coordinar múltiples contenedores definidos en un fichero `docker-compose.yml`.*
    - **Docker Swarm:**
      - *Orquestador nativo de Docker para manejar clústeres distribuidos. Permite convertir múltiples nodos en un único clúster lógico.*
    - **Kubernetes:**
@@ -104,7 +104,7 @@
 
 ### ***Flujo de orquestación típico***
 
-1. *El orquestador recibe un archivo de configuración (como un `docker-compose.yml` o manifiestos YAML de Kubernetes).*
+1. *El orquestador recibe un fichero de configuración (como un `docker-compose.yml` o manifiestos YAML de Kubernetes).*
 2. *Evalúa las necesidades de recursos, redes, volúmenes y dependencias.*
 3. *Inicia y distribuye los contenedores en los nodos adecuados (si hay un clúster).*
 4. *Monitorea la salud de los contenedores y realiza ajustes dinámicos (escalado o reinicio).*

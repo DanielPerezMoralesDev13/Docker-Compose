@@ -153,10 +153,10 @@ docker volume create my-volume
 docker run -itu root:root -w /App --volume my-volume:/App --name rw-container ubuntu:latest
 ```
 
-**Dentro del contenedor, crea un archivo para probar los permisos:**
+**Dentro del contenedor, crea un fichero para probar los permisos:**
 
 ```bash
-echo "Este es un archivo de prueba" > /App/test.txt
+echo "Este es un fichero de prueba" > /App/test.txt
 ```
 
 ```bash
@@ -164,7 +164,7 @@ cat /App/test.txt
 ```
 
 ```bash
-Este es un archivo de prueba
+Este es un fichero de prueba
 ```
 
 #### **Con `--mount`**
@@ -178,7 +178,7 @@ docker run -itu root:root -w /App --mount type=volume,source=my-volume,target=/A
 **Prueba creando y leyendo archivos:**
 
 ```bash
-echo "Archivo creado con --mount" > /App/mount-test.txt
+echo "Fichero creado con --mount" > /App/mount-test.txt
 ```
 
 ```bash
@@ -186,7 +186,7 @@ cat /App/mount-test.txt
 ```
 
 ```bash
-Archivo creado con --mount
+Fichero creado con --mount
 ```
 
 ---
@@ -309,7 +309,7 @@ interact
 ```
 
 ```bash
-echo "Archivo solo escritura" > /App/write-only.txt
+echo "Fichero solo escritura" > /App/write-only.txt
 ```
 
 **Usa el mismo enfoque con `--mount`:**
@@ -383,7 +383,7 @@ interact
 ```
 
 ```bash
-echo "Archivo solo escritura" > /App/write-only.txt
+echo "Fichero solo escritura" > /App/write-only.txt
 ```
 
 ---
@@ -436,7 +436,7 @@ sudo lsd -lA --tree /var/lib/docker/volumes/my-volume/_data
 
 **`expect -c '...'`:**
 
-- *La opción `-c` permite ejecutar un comando `expect` desde la línea de comandos en lugar de escribirlo en un archivo. Dentro de las comillas, se define todo el script `expect`.*
+- *La opción `-c` permite ejecutar un comando `expect` desde la línea de comandos en lugar de escribirlo en un fichero. Dentro de las comillas, se define todo el script `expect`.*
 
 **`spawn su root`:**
 

@@ -11,7 +11,7 @@
 
 - **Esperar a que un servicio esté disponible:** *Puedes usar `dockerize` para esperar que un puerto esté disponible antes de continuar con la ejecución de otro contenedor.*
 - **Expresión de dependencia:** *Permite expresar dependencias de red, por ejemplo, esperar que un contenedor de base de datos esté disponible en un puerto específico antes de que tu aplicación intente conectarse.*
-- **Configuración fácil:** *Es fácil de usar en el archivo `Dockerfile` o `docker-compose.yml`, donde puedes especificar qué puerto o servicio debe estar listo.*
+- **Configuración fácil:** *Es fácil de usar en el fichero `Dockerfile` o `docker-compose.yml`, donde puedes especificar qué puerto o servicio debe estar listo.*
 
 #### **Ejemplo de uso de `dockerize`**
 

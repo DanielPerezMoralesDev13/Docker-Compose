@@ -70,7 +70,7 @@
 
 - *Cambia `ME_CONFIG_MONGODB_SERVER=mongodb` por `ME_CONFIG_MONGODB_URL=mongodb://admin:password@mongodb:27017/`.*
 
-- **Ejemplo en el archivo `docker-compose.yaml`:**
+- **Ejemplo en el fichero `docker-compose.yaml`:**
 
 ```yaml
 mongo-express:
@@ -144,7 +144,7 @@ mongo-express:
 
 ### **Resumen de configuración recomendada**
 
-- *Este archivo `docker-compose.yaml` debería funcionar correctamente:*
+- *Este fichero `docker-compose.yaml` debería funcionar correctamente:*
 
 ```yaml
 version: "3"

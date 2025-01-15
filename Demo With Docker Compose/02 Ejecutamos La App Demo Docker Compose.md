@@ -4,7 +4,7 @@
 
 # **Docker Compose App**
 
-- **La opción `--file` en `docker compose` es equivalente a `-f`. Ambas permiten especificar el archivo de configuración de Docker Compose que se desea usar.**
+- **La opción `--file` en `docker compose` es equivalente a `-f`. Ambas permiten especificar el fichero de configuración de Docker Compose que se desea usar.**
 
 **Ejemplo:**
 
@@ -49,7 +49,7 @@ docker compose -fmongo-services.yaml up;
 WARN[0000] /home/d4nitrix13/Escritorio/Repository/Docker Compose/Demo With Docker Compose/mongo-services.yaml: the attribute `version` is obsolete, it will be ignored, please remove it to avoid potential confusion
 ```
 
-- *Para resolverla, se debe eliminar el atributo `version` del archivo `mongo-services.yaml`, ya que está **deprecated**.*
+- *Para resolverla, se debe eliminar el atributo `version` del fichero `mongo-services.yaml`, ya que está **deprecated**.*
 
 ```yaml
 # Autor: Daniel Benjamin Perez Morales
@@ -101,7 +101,7 @@ mongo-express-1  | /docker-entrypoint.sh: line 15: /dev/tcp/mongo-demo/27017: Co
 
 ### **Solución para el error de conexión**
 
-**Es posible que el contenedor `mongo-demo` aún esté iniciando cuando `mongo-express` intenta conectarse. Una forma de resolverlo es asegurarse de que `mongo-express` espere hasta que `mongo-demo` esté completamente listo. Esto puede lograrse mediante la configuración de dependencias en el archivo `docker-compose.yml` usando `depends_on` o configurando un retraso en el inicio de `mongo-express`.**
+**Es posible que el contenedor `mongo-demo` aún esté iniciando cuando `mongo-express` intenta conectarse. Una forma de resolverlo es asegurarse de que `mongo-express` espere hasta que `mongo-demo` esté completamente listo. Esto puede lograrse mediante la configuración de dependencias en el fichero `docker-compose.yml` usando `depends_on` o configurando un retraso en el inicio de `mongo-express`.**
 
 ```yaml
 # Autor: Daniel Benjamin Perez Morales
@@ -253,7 +253,7 @@ Gracefully stopping... (press Ctrl+C again to force)
 
 - **Docker Compose Down**
 
-- **El comando docker compose down no solo detiene los contenedores, sino que también elimina los contenedores, redes, volúmenes y demás recursos asociados a los servicios definidos en tu archivo docker-compose.yml.**
+- **El comando docker compose down no solo detiene los contenedores, sino que también elimina los contenedores, redes, volúmenes y demás recursos asociados a los servicios definidos en tu fichero docker-compose.yml.**
 
 - **Detiene y elimina los contenedores:** *Los contenedores en ejecución son detenidos y eliminados.*
 - **Elimina las redes creadas por Docker Compose:** *También elimina las redes que Docker Compose crea para interconectar los servicios entre sí.*
@@ -316,7 +316,7 @@ docker compose -fmongo-services.yaml down
 
 *[Foro Depends On](https://stackoverflow.com/questions/71060072/docker-compose-depends-on-with-condition-invalid-type-should-be-an-array "https://stackoverflow.com/questions/71060072/docker-compose-depends-on-with-condition-invalid-type-should-be-an-array")*
 
-- *Mongo-express podría estar intentando conectarse a MongoDB antes de que el servicio `mongo-demo` esté completamente disponible. Aunque hayas configurado la dependencia en el archivo YAML con `depends_on`, esto solo garantiza que Docker intente iniciar el contenedor `mongo-demo` antes de `mongo-express`, pero **no espera a que MongoDB esté realmente listo para aceptar conexiones**.*
+- *Mongo-express podría estar intentando conectarse a MongoDB antes de que el servicio `mongo-demo` esté completamente disponible. Aunque hayas configurado la dependencia en el fichero YAML con `depends_on`, esto solo garantiza que Docker intente iniciar el contenedor `mongo-demo` antes de `mongo-express`, pero **no espera a que MongoDB esté realmente listo para aceptar conexiones**.*
 
 - **Docker Compose asegura que el contenedor de `mongo-demo` inicie primero, pero no verifica si MongoDB está en funcionamiento o si está completamente listo para aceptar conexiones. Esto puede llevar a que `mongo-express` falle al intentar conectarse, ya que MongoDB aún no está escuchando en el puerto.**
 
@@ -349,7 +349,7 @@ docker compose -fmongo-services.yaml down
 2. **Alternativas:** *También puedes usar herramientas como **wait-for-it** o **dockerize**, que están diseñadas específicamente para este tipo de casos. Estas herramientas permiten que un contenedor espere a que otro servicio esté disponible antes de continuar con su ejecución.*
 
 > [!TIP]
-> *El símbolo **`|`** en un archivo YAML (y en general en muchos lenguajes y configuraciones) se utiliza para indicar que el valor de una clave será un **bloque de texto multilínea**. Cuando se usa en YAML, permite escribir texto que se extiende a varias líneas y se conserva la indentación en el resultado final.*
+> *El símbolo **`|`** en un fichero YAML (y en general en muchos lenguajes y configuraciones) se utiliza para indicar que el valor de una clave será un **bloque de texto multilínea**. Cuando se usa en YAML, permite escribir texto que se extiende a varias líneas y se conserva la indentación en el resultado final.*
 
 ### **¿Cómo funciona?**
 

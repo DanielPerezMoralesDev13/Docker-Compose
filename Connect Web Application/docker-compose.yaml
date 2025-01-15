@@ -26,6 +26,13 @@ secrets:
 
 services:
   app:
+    healthcheck:
+      test: ["executable", "arg"]
+      interval: 1m30s
+      timeout: 30s
+      retries: 5
+      start_period: 30s
+    container_name: container-app
     build: .
     ports:
       - 3000:3000
@@ -36,6 +43,7 @@ services:
       MONGO_DB_USERNAME: ${MONGO_DB_USERNAME}
       MONGO_DB_PWD: ${MONGO_DB_PWD}
   mongo-demo:
+    container_name: container-mongo-demo
     image: mongo:latest
     ports:
       - 27017:27017
@@ -46,6 +54,7 @@ services:
       MONGO_INITDB_ROOT_USERNAME_FILE: /run/secrets/MONGO_INITDB_ROOT_USERNAME
       MONGO_INITDB_ROOT_PASSWORD_FILE: /run/secrets/MONGO_INITDB_ROOT_PASSWORD
   mongo-express:
+    container_name: container-mongo-express
     depends_on:
       - mongo-demo
     image: mongo-express

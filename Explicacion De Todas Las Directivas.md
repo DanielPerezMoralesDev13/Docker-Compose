@@ -4,7 +4,7 @@
 
 # Explicacion
 
-Docker Compose es una herramienta potente para definir y ejecutar aplicaciones multi-contenedor en Docker. Para lograr esta funcionalidad, **Docker Compose** utiliza un archivo de configuración en formato YAML, llamado `docker-compose.yml`, en el cual se definen diversos servicios, redes, volúmenes, y otros aspectos de la infraestructura.
+Docker Compose es una herramienta potente para definir y ejecutar aplicaciones multi-contenedor en Docker. Para lograr esta funcionalidad, **Docker Compose** utiliza un fichero de configuración en formato YAML, llamado `docker-compose.yml`, en el cual se definen diversos servicios, redes, volúmenes, y otros aspectos de la infraestructura.
 
 A continuación, te explicaré **todas las directivas** posibles en Docker Compose, con una breve explicación de cada una, y luego te proporcionaré un ejemplo aplicando todas.
 
@@ -14,7 +14,7 @@ A continuación, te explicaré **todas las directivas** posibles en Docker Compo
 
 #### **`version`**
 
-Especifica la versión de la sintaxis del archivo `docker-compose.yml`. La versión puede variar, dependiendo de las características que se deseen usar.
+Especifica la versión de la sintaxis del fichero `docker-compose.yml`. La versión puede variar, dependiendo de las características que se deseen usar.
 
 Ejemplo:
 
@@ -376,11 +376,11 @@ secrets:
     file: ./secrets/password.txt
 ```
 
-Este archivo `docker-compose.yml` utiliza **todas** las directivas disponibles, cubriendo todos los aspectos posibles de configuración en Docker Compose, como la creación de redes, volúmenes, servicios, manejo de dependencias, logs, variables de entorno, y mucho más.
+Este fichero `docker-compose.yml` utiliza **todas** las directivas disponibles, cubriendo todos los aspectos posibles de configuración en Docker Compose, como la creación de redes, volúmenes, servicios, manejo de dependencias, logs, variables de entorno, y mucho más.
 
 ---
 
-Docker Compose es una herramienta potente para definir y ejecutar aplicaciones multi-contenedor en Docker. Para lograr esta funcionalidad, **Docker Compose** utiliza un archivo de configuración en formato YAML, llamado `docker-compose.yml`, en el cual se definen diversos servicios, redes, volúmenes, y otros aspectos de la infraestructura.
+Docker Compose es una herramienta potente para definir y ejecutar aplicaciones multi-contenedor en Docker. Para lograr esta funcionalidad, **Docker Compose** utiliza un fichero de configuración en formato YAML, llamado `docker-compose.yml`, en el cual se definen diversos servicios, redes, volúmenes, y otros aspectos de la infraestructura.
 
 A continuación, te explicaré **todas las directivas** posibles en Docker Compose, con una breve explicación de cada una, y luego te proporcionaré un ejemplo aplicando todas.
 
@@ -390,7 +390,7 @@ A continuación, te explicaré **todas las directivas** posibles en Docker Compo
 
 #### **`version`**
 
-Especifica la versión de la sintaxis del archivo `docker-compose.yml`. La versión puede variar, dependiendo de las características que se deseen usar.
+Especifica la versión de la sintaxis del fichero `docker-compose.yml`. La versión puede variar, dependiendo de las características que se deseen usar.
 
 Ejemplo:
 
@@ -752,7 +752,7 @@ secrets:
     file: ./secrets/password.txt
 ```
 
-Este archivo `docker-compose.yml` utiliza **todas** las directivas disponibles, cubriendo todos los aspectos posibles de configuración en Docker Compose, como la creación de redes, volúmenes, servicios, manejo de dependencias, logs, variables de entorno, y mucho más.
+Este fichero `docker-compose.yml` utiliza **todas** las directivas disponibles, cubriendo todos los aspectos posibles de configuración en Docker Compose, como la creación de redes, volúmenes, servicios, manejo de dependencias, logs, variables de entorno, y mucho más.
 
 ---
 
@@ -838,7 +838,7 @@ sysctls:
 
 #### **`extra_hosts`**
 
-Permite agregar entradas adicionales al archivo `/etc/hosts` del contenedor.
+Permite agregar entradas adicionales al fichero `/etc/hosts` del contenedor.
 
 Ejemplo:
 
@@ -929,7 +929,7 @@ volumes:
     driver: local
 ```
 
-Ahora el archivo incluye **todas las directivas** de Docker Compose.
+Ahora el fichero incluye **todas las directivas** de Docker Compose.
 
 ---
 
@@ -1114,7 +1114,7 @@ expose:
 
 #### **`external_links`**
 
-Permite enlazar un contenedor de Docker que está fuera de la red Docker Compose a uno dentro del archivo `docker-compose.yml`.
+Permite enlazar un contenedor de Docker que está fuera de la red Docker Compose a uno dentro del fichero `docker-compose.yml`.
 
 Ejemplo:
 
@@ -1136,7 +1136,7 @@ extra_hosts:
 
 #### **`extends`**
 
-Permite que un servicio herede la configuración de otro servicio en un archivo externo o en el mismo archivo `docker-compose.yml`.
+Permite que un servicio herede la configuración de otro servicio en un fichero externo o en el mismo fichero `docker-compose.yml`.
 
 Ejemplo:
 

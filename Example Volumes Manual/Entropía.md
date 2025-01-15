@@ -47,7 +47,7 @@
   - *`/dev/random` y `/dev/urandom` están asociados con la **entropía del sistema** y utilizan **buffers** en memoria (RAM) para almacenar las fuentes de entropía antes de generar los números aleatorios. Si el sistema se queda sin entropía (poca variabilidad en la RAM y las fuentes externas), `/dev/random` se bloqueará hasta que haya suficiente.*
 
 - **Almacenamiento de Entropía:**
-  - *Los datos de entropía no son necesariamente "almacenados" en un archivo, sino que son generados a medida que ocurren eventos impredecibles en el sistema. El sistema operativo mantiene un **pool de entropía** en memoria, el cual se va llenando con cada nuevo evento impredecible y se vacía cuando el generador de números aleatorios lo utiliza.*
+  - *Los datos de entropía no son necesariamente "almacenados" en un fichero, sino que son generados a medida que ocurren eventos impredecibles en el sistema. El sistema operativo mantiene un **pool de entropía** en memoria, el cual se va llenando con cada nuevo evento impredecible y se vacía cuando el generador de números aleatorios lo utiliza.*
   - *Los valores de entropía se almacenan en el sistema de manera temporal mientras están disponibles, pero pueden ser sobreescritos conforme el sistema sigue generando más eventos impredecibles. Este almacenamiento se encuentra típicamente en el **núcleo del sistema operativo**, a menudo gestionado por el módulo de entropía (por ejemplo, `rngd` en Linux).*
 
 ### ***Resumen***

@@ -20,10 +20,10 @@
   - *Configurar los contenedores y sus opciones*
   - *Manejar el estado de los contenedores (iniciar, detener, reiniciar)*
 
-- **Aunque este ejemplo es sencillo, es ideal mapear esta configuración a un archivo Docker Compose para simplificar el manejo**
+- **Aunque este ejemplo es sencillo, es ideal mapear esta configuración a un fichero Docker Compose para simplificar el manejo**
 
 > [!IMPORTANT]
-> **Docker Compose crea automáticamente una red dedicada para todos los servicios definidos en el archivo**
+> **Docker Compose crea automáticamente una red dedicada para todos los servicios definidos en el fichero**
 
 ## ***Configuración manual***
 
@@ -65,27 +65,27 @@ docker run -d \
     mongo-express:latest;
 ```
 
-### **Usando un archivo personalizado de Docker Compose**
+### **Usando un fichero personalizado de Docker Compose**
 
-- *Cuando creamos un archivo personalizado de Docker Compose, a menudo se le llama **`docker-compose.yml`**. Sin embargo, si decidimos darle un nombre diferente (en este caso, **`mongo-services.yaml`**), debemos asegurarnos de indicarlo correctamente al ejecutar los comandos de Docker Compose.*
+- *Cuando creamos un fichero personalizado de Docker Compose, a menudo se le llama **`docker-compose.yml`**. Sin embargo, si decidimos darle un nombre diferente (en este caso, **`mongo-services.yaml`**), debemos asegurarnos de indicarlo correctamente al ejecutar los comandos de Docker Compose.*
 
-- *Por ejemplo, si hemos creado el archivo personalizado **`mongo-services.yaml`**, lo primero que debemos hacer es asegurarnos de estar en el directorio donde se encuentra el archivo. Si no estamos en la misma ubicación, debemos utilizar el parámetro **`-f`** o **`--file`** para especificar la ruta al archivo de configuración.*
+- *Por ejemplo, si hemos creado el fichero personalizado **`mongo-services.yaml`**, lo primero que debemos hacer es asegurarnos de estar en el directorio donde se encuentra el fichero. Si no estamos en la misma ubicación, debemos utilizar el parámetro **`-f`** o **`--file`** para especificar la ruta al fichero de configuración.*
 
-### **Creación del archivo personalizado**
+### **Creación del fichero personalizado**
 
-- *Para crear un archivo con el nombre **`mongo-services.yaml`**, simplemente ejecutamos:*
+- *Para crear un fichero con el nombre **`mongo-services.yaml`**, simplemente ejecutamos:*
 
 ```bash
 touch mongo-services.yaml
 ```
 
-- *Esto creará un archivo vacío que podemos editar con nuestra configuración personalizada de Docker Compose.*
+- *Esto creará un fichero vacío que podemos editar con nuestra configuración personalizada de Docker Compose.*
 
-### **Ejecutando Docker Compose con un archivo personalizado**
+### **Ejecutando Docker Compose con un fichero personalizado**
 
-- *Si usamos un archivo con un nombre diferente o si no estamos ubicados en el directorio donde se encuentra el archivo **`docker-compose.yml`** (o en este caso **`mongo-services.yaml`**), debemos especificar la ubicación del archivo utilizando el parámetro **`-f`** o **`--file`**. Podemos proporcionar una **ruta relativa** o **absoluta** al archivo.*
+- *Si usamos un fichero con un nombre diferente o si no estamos ubicados en el directorio donde se encuentra el fichero **`docker-compose.yml`** (o en este caso **`mongo-services.yaml`**), debemos especificar la ubicación del fichero utilizando el parámetro **`-f`** o **`--file`**. Podemos proporcionar una **ruta relativa** o **absoluta** al fichero.*
 
-**Ejemplo:** *Si el archivo **`mongo-services.yaml`** se encuentra en una subcarpeta llamada **`Version 1 Mongo Services`**, debemos usar:*
+**Ejemplo:** *Si el fichero **`mongo-services.yaml`** se encuentra en una subcarpeta llamada **`Version 1 Mongo Services`**, debemos usar:*
 
 ```bash
 docker compose -f ./Directory/mongo-services.yaml up
@@ -94,7 +94,7 @@ docker compose -f ./Directory/mongo-services.yaml up
 ### **Detalles importantes**
 
 - **Ruta relativa:** *En este caso, la ruta es relativa, comenzando desde el directorio actual. Debemos tener en cuenta las **espacios en los nombres de las carpetas** y usarlos correctamente con las barras invertidas (`\`) para escaparlos, como en **`Directory`**.*
-- **Ruta absoluta:** *Si proporcionamos una ruta absoluta, podemos especificar la ruta completa al archivo, por ejemplo:*
+- **Ruta absoluta:** *Si proporcionamos una ruta absoluta, podemos especificar la ruta completa al fichero, por ejemplo:*
 
   ```bash
   docker compose -f /home/user/Proyect/Directory/mongo-services.yaml up
@@ -106,17 +106,17 @@ docker compose -f ./Directory/mongo-services.yaml up
 
 ### **¿Qué pasa cuando ejecutamos `docker compose up` o `docker compose down`?**
 
-- **`docker compose up`:** *Este comando **levanta los servicios definidos** en el archivo **`mongo-services.yaml`**. Docker Compose leerá la configuración del archivo y arrancará los contenedores definidos.*
-- **`docker compose down`:** *Este comando **detiene y elimina los contenedores, redes y volúmenes** asociados con el archivo de configuración, lo que limpia todo el entorno creado por Docker Compose.*
+- **`docker compose up`:** *Este comando **levanta los servicios definidos** en el fichero **`mongo-services.yaml`**. Docker Compose leerá la configuración del fichero y arrancará los contenedores definidos.*
+- **`docker compose down`:** *Este comando **detiene y elimina los contenedores, redes y volúmenes** asociados con el fichero de configuración, lo que limpia todo el entorno creado por Docker Compose.*
 
-**Recuerda:** *Siempre que no estés en el mismo directorio donde se encuentra tu archivo **`docker-compose.yml`** o **`mongo-services.yaml`**, debes especificar la ubicación del archivo con **`-f`** o **`--file`**, seguido de la ruta correspondiente.*
+**Recuerda:** *Siempre que no estés en el mismo directorio donde se encuentra tu fichero **`docker-compose.yml`** o **`mongo-services.yaml`**, debes especificar la ubicación del fichero con **`-f`** o **`--file`**, seguido de la ruta correspondiente.*
 
 - **Resumen**
 
-- **Cuando usamos `docker compose up` o `docker compose down`,** *debemos estar en el directorio correcto donde se encuentra el archivo **`docker-compose.yml`** o utilizar el parámetro **`-f`** o **`--file`** para indicar la ruta al archivo si se encuentra en una ubicación diferente.*
-- *Si le damos un nombre diferente al archivo (como **`mongo-services.yaml`**), asegurarnos de especificar correctamente la ruta al archivo con el parámetro **`-f`** o **`--file`**.*
+- **Cuando usamos `docker compose up` o `docker compose down`,** *debemos estar en el directorio correcto donde se encuentra el fichero **`docker-compose.yml`** o utilizar el parámetro **`-f`** o **`--file`** para indicar la ruta al fichero si se encuentra en una ubicación diferente.*
+- *Si le damos un nombre diferente al fichero (como **`mongo-services.yaml`**), asegurarnos de especificar correctamente la ruta al fichero con el parámetro **`-f`** o **`--file`**.*
   
-- *Por ejemplo, si el archivo **`mongo-services.yaml`** se encuentra en una subcarpeta, usaríamos:*
+- *Por ejemplo, si el fichero **`mongo-services.yaml`** se encuentra en una subcarpeta, usaríamos:*
 
 - **Iniciar Servicios**
 
@@ -169,7 +169,7 @@ services:
 
 ### **Asignación de nombres y red por defecto en `docker compose up`**
 
-- *Cuando se ejecuta `docker compose up`, Docker asigna nombres y redes automáticamente si no se especifican explícitamente en el archivo de configuración (`docker-compose.yml`) o mediante opciones. Esto sigue un patrón estándar:*
+- *Cuando se ejecuta `docker compose up`, Docker asigna nombres y redes automáticamente si no se especifican explícitamente en el fichero de configuración (`docker-compose.yml`) o mediante opciones. Esto sigue un patrón estándar:*
 
 ---
 
@@ -181,8 +181,8 @@ services:
   <name_directory>_<name_service>_<num>
   ```
 
-  - **`<name_directory>`:** *Nombre del directorio donde se encuentra el archivo `docker-compose.yml`.*
-  - **`<name_service>`:** *Nombre del servicio definido en el archivo `docker-compose.yml`.*
+  - **`<name_directory>`:** *Nombre del directorio donde se encuentra el fichero `docker-compose.yml`.*
+  - **`<name_service>`:** *Nombre del servicio definido en el fichero `docker-compose.yml`.*
   - **`<num>`:** *Número incremental asignado a los contenedores del mismo servicio.*
 
 - **Ejemplo:**
@@ -211,8 +211,8 @@ services:
   <name_directory>_default
   ```
 
-  - *Docker crea automáticamente una red tipo `bridge` para los servicios definidos en el archivo `docker-compose.yml`.*
-  - *Esta red es privada para los contenedores del mismo archivo y permite la comunicación interna entre ellos.*
+  - *Docker crea automáticamente una red tipo `bridge` para los servicios definidos en el fichero `docker-compose.yml`.*
+  - *Esta red es privada para los contenedores del mismo fichero y permite la comunicación interna entre ellos.*
 
 - **Ejemplo:**
   - *Carpeta: `project1/`*
@@ -226,7 +226,7 @@ services:
 
 #### **Ejemplo completo:**
 
-**Archivo `docker-compose.yml`:**
+**Fichero `docker-compose.yml`:**
 
 ```yaml
 services:

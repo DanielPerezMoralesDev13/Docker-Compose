@@ -2,7 +2,7 @@
 <!-- GitHub: https://github.com/DanielPerezMoralesDev13 -->
 <!-- Correo electrónico: danielperezdev@proton.me -->
 
-# **El comando `docker compose --project-name project --file mongo-services.yaml up --detach --timestamps --build` se utiliza para ejecutar un conjunto de servicios definidos en un archivo `docker-compose.yaml` con varias opciones adicionales.**
+# **El comando `docker compose --project-name project --file mongo-services.yaml up --detach --timestamps --build` se utiliza para ejecutar un conjunto de servicios definidos en un fichero `docker-compose.yaml` con varias opciones adicionales.**
 
 ## **Desglose del comando**
 
@@ -13,10 +13,10 @@
    *Establece un nombre específico para el proyecto que se va a ejecutar. En este caso, el proyecto se llama `project`. Esto se usa para agrupar y distinguir los contenedores, redes y volúmenes creados por este proyecto. Si no se especifica, Docker Compose usará el nombre del directorio donde se ejecuta el comando.*
 
 3. **`--file mongo-services.yaml`:**
-   *Especifica el archivo YAML que define los servicios de Docker Compose. En este caso, el archivo es `mongo-services.yaml`. Este archivo debe contener la configuración de los contenedores, redes y volúmenes que Docker Compose debe crear y gestionar.*
+   *Especifica el fichero YAML que define los servicios de Docker Compose. En este caso, el fichero es `mongo-services.yaml`. Este fichero debe contener la configuración de los contenedores, redes y volúmenes que Docker Compose debe crear y gestionar.*
 
 4. **`up`:**
-   *Inicia y ejecuta los servicios definidos en el archivo de configuración de Docker Compose. Si los contenedores ya existen, Docker Compose intentará recrearlos si es necesario (por ejemplo, si se hicieron cambios en las configuraciones).*
+   *Inicia y ejecuta los servicios definidos en el fichero de configuración de Docker Compose. Si los contenedores ya existen, Docker Compose intentará recrearlos si es necesario (por ejemplo, si se hicieron cambios en las configuraciones).*
 
 5. **`--detach`:**
    *Inicia los contenedores en segundo plano (modo "detached"). Esto significa que el terminal no se quedará bloqueado con los logs de los contenedores, y podrás continuar usando el terminal para otros comandos. Si no se usa esta opción, Docker Compose ejecutaría los contenedores en primer plano, mostrando los logs directamente en la terminal.*
@@ -31,7 +31,7 @@
 
 *El comando `docker compose --project-name project --file mongo-services.yaml up --detach --timestamps --build` realiza lo siguiente:*
 
-- *Usa el archivo `mongo-services.yaml` para definir los servicios.*
+- *Usa el fichero `mongo-services.yaml` para definir los servicios.*
 - *Establece el nombre del proyecto como `project`.*
 - *Inicia los servicios definidos en segundo plano (sin bloquear la terminal).*
 - *Muestra los logs con marcas de tiempo.*

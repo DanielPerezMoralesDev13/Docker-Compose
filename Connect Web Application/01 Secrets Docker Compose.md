@@ -9,7 +9,7 @@
 
 ## **¿Qué son los secrets en Docker Compose?**
 
-- *Los **secrets** son una funcionalidad en Docker Compose diseñada para manejar información sensible, como contraseñas, claves API, certificados o cualquier dato que no debería estar expuesto en el archivo `docker-compose.yaml` o dentro de los contenedores de manera insegura.*
+- *Los **secrets** son una funcionalidad en Docker Compose diseñada para manejar información sensible, como contraseñas, claves API, certificados o cualquier dato que no debería estar expuesto en el fichero `docker-compose.yaml` o dentro de los contenedores de manera insegura.*
 
 - *Los **secrets** son más seguros que las variables de entorno porque se gestionan de forma aislada en el contenedor y solo son accesibles para los servicios que los necesitan.*
 
@@ -31,9 +31,9 @@
 
 #### **¿Por qué usar las variables que terminan en `_FILE`?**
 
-- *Algunas imágenes de Docker, como las de bases de datos (por ejemplo, `mongo`), soportan esta convención para evitar exponer credenciales de manera directa dentro de las variables de entorno. La imagen puede leer el contenido del archivo en la ruta especificada (`/run/secrets/filename`) y usarlo como si fuera el valor de la variable de entorno.*
+- *Algunas imágenes de Docker, como las de bases de datos (por ejemplo, `mongo`), soportan esta convención para evitar exponer credenciales de manera directa dentro de las variables de entorno. La imagen puede leer el contenido del fichero en la ruta especificada (`/run/secrets/filename`) y usarlo como si fuera el valor de la variable de entorno.*
 
-- *Por ejemplo, en el caso de MongoDB, la variable de entorno `MONGO_INITDB_ROOT_PASSWORD_FILE` indicará a la imagen que lea el archivo `/run/secrets/MONGO_INITDB_ROOT_PASSWORD` para obtener la contraseña del usuario raíz, en lugar de almacenar la contraseña directamente en la variable.*
+- *Por ejemplo, en el caso de MongoDB, la variable de entorno `MONGO_INITDB_ROOT_PASSWORD_FILE` indicará a la imagen que lea el fichero `/run/secrets/MONGO_INITDB_ROOT_PASSWORD` para obtener la contraseña del usuario raíz, en lugar de almacenar la contraseña directamente en la variable.*
 
 #### **Ventajas**
 
@@ -42,7 +42,7 @@
 
 ### **Ejemplo técnico con Docker Compose**
 
-*Al usar la directiva `secrets` en un archivo `docker-compose.yaml`, se puede definir el origen de los secretos y su correspondiente referencia en las variables de entorno. Cuando se utiliza la convención de `_FILE`, las aplicaciones como MongoDB pueden leer automáticamente los valores de los archivos secretos.*
+*Al usar la directiva `secrets` en un fichero `docker-compose.yaml`, se puede definir el origen de los secretos y su correspondiente referencia en las variables de entorno. Cuando se utiliza la convención de `_FILE`, las aplicaciones como MongoDB pueden leer automáticamente los valores de los archivos secretos.*
 
 *Aquí tienes una explicación más detallada y una corrección del ejemplo original que incluye este uso adecuado de las variables de entorno y los secretos:*
 
@@ -70,7 +70,7 @@ echo "pass" > ./secrets/ME_CONFIG_MONGODB_AUTH_PASSWORD.txt
 
 ### **Paso 2: Definir los secrets en `docker-compose.yaml`**
 
-*En el archivo `docker-compose.yaml`, define los secretos y su origen (en este caso, desde los archivos creados previamente):*
+*En el fichero `docker-compose.yaml`, define los secretos y su origen (en este caso, desde los archivos creados previamente):*
 
 ```yaml
 # Autor: Daniel Benjamin Perez Morales
@@ -165,7 +165,7 @@ services:
 
 ### **Paso 3: Explicación técnica sobre el uso de `_FILE`**
 
-1. **Variables de entorno `_FILE`:** *Al utilizar variables como `MONGO_INITDB_ROOT_PASSWORD_FILE`, Docker lee el archivo de secreto en la ubicación `/run/secrets/<name_secret>` en lugar de pasar el valor directamente en la variable de entorno. Esto es útil para mantener los secretos (como contraseñas y claves) fuera de las variables de entorno, lo que mejora la seguridad.*
+1. **Variables de entorno `_FILE`:** *Al utilizar variables como `MONGO_INITDB_ROOT_PASSWORD_FILE`, Docker lee el fichero de secreto en la ubicación `/run/secrets/<name_secret>` en lugar de pasar el valor directamente en la variable de entorno. Esto es útil para mantener los secretos (como contraseñas y claves) fuera de las variables de entorno, lo que mejora la seguridad.*
 
 2. **Cómo funciona:** *En el servicio de `mongo-demo`, las variables de entorno como `MONGO_INITDB_ROOT_USERNAME_FILE` y `MONGO_INITDB_ROOT_PASSWORD_FILE` están apuntando a archivos dentro de `/run/secrets/`, donde Docker almacena los secretos de manera segura. Las imágenes que soportan esta convención (como la de `mongo` y `mongo-express`) serán capaces de leer el contenido de estos archivos y utilizarlos para configurar el contenedor de manera automática.*
 
@@ -181,7 +181,7 @@ services:
 
 1. **Contraseñas de bases de datos:**
    - *Evita almacenar contraseñas como texto plano en las variables de entorno.*
-   - *El archivo de secrets asegura que las contraseñas estén protegidas y no expuestas en el contenedor.*
+   - *El fichero de secrets asegura que las contraseñas estén protegidas y no expuestas en el contenedor.*
 
 2. **Claves API:**
    - *Protege las claves de acceso a servicios externos (por ejemplo, AWS, Google Cloud).*

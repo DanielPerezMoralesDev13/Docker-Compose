@@ -4,13 +4,13 @@
 
 # **Variable In Docker Compose**
 
-## **El problema de las credenciales en el archivo `docker-compose.yaml`**
+## **El problema de las credenciales en el fichero `docker-compose.yaml`**
 
-*Cuando colocas credenciales directamente dentro del archivo `docker-compose.yaml`, estás expuesto a un riesgo de seguridad. Si el archivo se comparte o se sube a un repositorio público, las credenciales podrían ser comprometidas fácilmente. **Por lo tanto, es fundamental evitar hardcodear valores sensibles en los archivos de configuración.***
+*Cuando colocas credenciales directamente dentro del fichero `docker-compose.yaml`, estás expuesto a un riesgo de seguridad. Si el fichero se comparte o se sube a un repositorio público, las credenciales podrían ser comprometidas fácilmente. **Por lo tanto, es fundamental evitar hardcodear valores sensibles en los archivos de configuración.***
 
 ### **Solución: Usar variables de entorno**
 
-*Docker Compose permite hacer uso de variables de entorno para gestionar credenciales y configuraciones sensibles de manera segura. En lugar de definir valores directamente en el archivo `docker-compose.yaml`, puedes utilizar la sintaxis especial `${VARIABLE_NAME}` que hace referencia a las variables de entorno del sistema.*
+*Docker Compose permite hacer uso de variables de entorno para gestionar credenciales y configuraciones sensibles de manera segura. En lugar de definir valores directamente en el fichero `docker-compose.yaml`, puedes utilizar la sintaxis especial `${VARIABLE_NAME}` que hace referencia a las variables de entorno del sistema.*
 
 **Sintaxis recomendada:**
 
@@ -124,7 +124,7 @@ docker compose --project-name project -f mongo-services.yaml start
 
 ### **Resumen**
 
-1. **Evita almacenar credenciales directamente en el archivo `docker-compose.yaml`.**
+1. **Evita almacenar credenciales directamente en el fichero `docker-compose.yaml`.**
 2. **Usa variables de entorno** *para mantener las credenciales de manera segura.*
 3. **Configura las variables de entorno** *en tu terminal antes de ejecutar Docker Compose.*
 4. **Verifica las advertencias** *de Docker Compose si alguna variable de entorno no está configurada.*
