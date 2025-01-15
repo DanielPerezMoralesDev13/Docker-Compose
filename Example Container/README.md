@@ -6,6 +6,7 @@
 
 - *[Setting Password Of The New User In Non Interactive Way In Shell Script On Ubuntu](https://stackoverflow.com/questions/65226720/setting-password-of-the-new-user-in-non-interactive-way-in-shell-script-on-ubunt "https://stackoverflow.com/questions/65226720/setting-password-of-the-new-user-in-non-interactive-way-in-shell-script-on-ubunt")*
 - *[How to su non-interactively?](https://serverfault.com/questions/894440/how-to-su-non-interactively "https://serverfault.com/questions/894440/how-to-su-non-interactively")*
+- *[Linux Expect](https://phoenixnap.com/kb/linux-expect "https://phoenixnap.com/kb/linux-expect")*
 
 ```bash
 docker container run --help
