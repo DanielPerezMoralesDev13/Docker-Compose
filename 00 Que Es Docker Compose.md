@@ -12,6 +12,28 @@
 
 - *Docker Compose es una herramienta de Docker que permite definir y ejecutar aplicaciones con múltiples contenedores usando un archivo YAML. Su función principal es simplificar la orquestación de contenedores, gestionando su ciclo de vida (creación, configuración, inicialización y destrucción) y las relaciones entre ellos.*
 
+> [!TIP]
+> **El comando `docker system prune --all --force --volumes` realiza una limpieza exhaustiva en Docker, eliminando varios elementos que no están en uso.**
+
+- **`docker system prune`:** *Este comando elimina objetos no utilizados en Docker, como contenedores detenidos, imágenes no referenciadas, redes no utilizadas y volúmenes no utilizados.*
+
+- **`--all`:** *Con esta opción, Docker también elimina todas las imágenes no utilizadas, no solo aquellas que no tienen contenedores asociados. Esto incluye imágenes que están disponibles pero no están siendo usadas por ningún contenedor.*
+
+- **`--force`:** *Esta opción omite la confirmación interactiva, lo que significa que Docker procederá a eliminar los objetos sin pedir confirmación del usuario.*
+
+- **`--volumes`:** *Esta opción incluye la eliminación de volúmenes que no están en uso. Los volúmenes son utilizados por Docker para almacenar datos persistentes, y esta opción asegura que se eliminen los volúmenes que no están siendo utilizados por ningún contenedor.*
+
+- **En resumen**
+
+*El comando `docker system prune --all --force --volumes` elimina de manera forzada todos los recursos no utilizados en Docker, incluyendo:*
+
+- *Contenedores detenidos*
+- *Imágenes no usadas*
+- *Redes no utilizadas*
+- *Volúmenes no asociados a contenedores*
+
+*Es una forma de liberar espacio y limpiar el entorno de Docker, pero debes tener cuidado, ya que eliminará también volúmenes con datos importantes si no están siendo utilizados por contenedores activos.*
+
 ## **Explicación técnica a bajo nivel**
 
 1. **Definición de servicios:**

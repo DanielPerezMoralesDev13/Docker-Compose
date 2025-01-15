@@ -4,6 +4,9 @@
 
 # **Docker Compose Secrets: Ejemplos y Casos de Uso**
 
+- **[How to use secrets in Docker Compose](https://docs.docker.com/compose/how-tos/use-secrets/ "https://docs.docker.com/compose/how-tos/use-secrets/")**
+- **[How Do You Manage Secret Values With Docker-Compose V3.1?](https://stackoverflow.com/questions/42139605/how-do-you-manage-secret-values-with-docker-compose-v3-1 "https://stackoverflow.com/questions/42139605/how-do-you-manage-secret-values-with-docker-compose-v3-1")**
+
 ## **¿Qué son los secrets en Docker Compose?**
 
 - *Los **secrets** son una funcionalidad en Docker Compose diseñada para manejar información sensible, como contraseñas, claves API, certificados o cualquier dato que no debería estar expuesto en el archivo `docker-compose.yaml` o dentro de los contenedores de manera insegura.*

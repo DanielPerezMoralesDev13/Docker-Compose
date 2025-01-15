@@ -4,6 +4,7 @@
 
 # **Foros**
 
+- *[How to clean up Docker](https://stackoverflow.com/questions/45798076/how-to-clean-up-docker "https://stackoverflow.com/questions/45798076/how-to-clean-up-docker")*
 - *[.docker/config.json vs .dockercfg](https://stackoverflow.com/questions/35519072/docker-config-json-vs-dockercfg "https://stackoverflow.com/questions/35519072/docker-config-json-vs-dockercfg")*
 - *['docker ps' output formatting: list only names of running containers](https://stackoverflow.com/questions/50667371/docker-ps-output-formatting-list-only-names-of-running-containers  "https://stackoverflow.com/questions/50667371/docker-ps-output-formatting-list-only-names-of-running-containers")*
 
